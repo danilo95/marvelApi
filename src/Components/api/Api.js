@@ -51,6 +51,21 @@ export const getCharacters = () => {
 	return result;
 };
 
+export const getSingleCharacter = (id) => {
+	let result = url
+		.get(
+			`/characters/${id}?ts=${ts}&apikey=${marvelApi.publicKey}&hash=${hash}`
+		)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
+
 export const getStories = () => {
 	let result = url
 		.get(`/stories?ts=${ts}&apikey=${marvelApi.publicKey}&hash=${hash}`)

@@ -6,7 +6,7 @@ import LoadingView from '../loadingView/LoadingView';
 import Gallery from '../Gallery/Gallery';
 import { PageHeader, Tag, Row } from 'antd';
 
-import { Title } from './Style';
+import { Title } from '../globalStyles/Index';
 
 const SelectedComic = () => {
 	let { id } = useParams();
@@ -24,7 +24,7 @@ const SelectedComic = () => {
 			<div style={{ flex: 1 }}>{children}</div>
 		</Row>
 	);
-	console.log(loading);
+
 	return (
 		<div>
 			{loading && <LoadingView />}

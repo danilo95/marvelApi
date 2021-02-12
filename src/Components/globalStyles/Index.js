@@ -15,6 +15,18 @@ export const ContentWrapper = styled.div`
 	justify-content: space-between;
 `;
 
+export const Title = styled.h2`
+	width: 100%;
+	padding: 16px 24px;
+`;
+
+export const Show = styled.span`
+	&:hover {
+		cursor: pointer;
+		color: blue;
+	}
+`;
+
 //here start global styles
 export const GlobalStyle = createGlobalStyle`
  

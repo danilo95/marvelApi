@@ -1,6 +1,7 @@
 const initialState = {
 	listOfCharacters: [],
 	loading: false,
+	character: [],
 };
 
 export default (state = initialState, action) => {
@@ -9,6 +10,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				listOfCharacters: action.payload,
+				loading: false,
+			};
+		case 'GET_SINGLE_CHARACTER':
+			return {
+				...state,
+				character: action.payload,
 				loading: false,
 			};
 		case 'LOADING_CHARACTERS':
