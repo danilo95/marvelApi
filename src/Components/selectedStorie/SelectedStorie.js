@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
 import History from '../history/History';
-import { PageHeader, Image, Row, List, Tabs } from 'antd';
+import { PageHeader, Row, List, Tabs } from 'antd';
 import { Title, Show } from '../globalStyles/Index';
 
 const { TabPane } = Tabs;
@@ -28,7 +28,6 @@ const SelectedStorie = () => {
 
 	const handleRedirect = (path, regex, id) => {
 		var id = id.replace(new RegExp('.*' + regex), '');
-
 		History.push(`/${path}/${id}`);
 	};
 

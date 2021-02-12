@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
 import { PageHeader, Image, Row, List, Tabs } from 'antd';
+import History from '../history/History';
 import { Title, Show } from '../globalStyles/Index';
 const { TabPane } = Tabs;
 
@@ -17,6 +18,11 @@ const SelectedCharacter = () => {
 	useEffect(() => {
 		dispatch(getCharacterById(id));
 	}, []);
+
+	const handleRedirect = (path, regex, id) => {
+		var id = id.replace(new RegExp('.*' + regex), '');
+		History.push(`/${path}/${id}`);
+	};
 
 	const Content = ({ children, extraContent }) => (
 		<Row>
@@ -49,9 +55,35 @@ const SelectedCharacter = () => {
 								itemLayout="horizontal"
 								dataSource={results[0]?.series?.items}
 								renderItem={(item) => (
-									<List.Item actions={[<Show>Show</Show>]}>
+									<List.Item
+										actions={[
+											<Show
+												onClick={() =>
+													handleRedirect(
+														'serie',
+														'/series/',
+														item.resourceURI
+													)
+												}
+											>
+												Show
+											</Show>,
+										]}
+									>
 										<List.Item.Meta
-											title={<Show>{item.name}</Show>}
+											title={
+												<Show
+													onClick={() =>
+														handleRedirect(
+															'serie',
+															'/series/',
+															item.resourceURI
+														)
+													}
+												>
+													{item.name}
+												</Show>
+											}
 										/>
 									</List.Item>
 								)}
@@ -62,9 +94,35 @@ const SelectedCharacter = () => {
 								itemLayout="horizontal"
 								dataSource={results[0]?.stories?.items}
 								renderItem={(item) => (
-									<List.Item actions={[<Show>Show</Show>]}>
+									<List.Item
+										actions={[
+											<Show
+												onClick={() =>
+													handleRedirect(
+														'storie',
+														'/stories/',
+														item.resourceURI
+													)
+												}
+											>
+												Show
+											</Show>,
+										]}
+									>
 										<List.Item.Meta
-											title={<Show>{item.name}</Show>}
+											title={
+												<Show
+													onClick={() =>
+														handleRedirect(
+															'storie',
+															'/stories/',
+															item.resourceURI
+														)
+													}
+												>
+													{item.name}
+												</Show>
+											}
 										/>
 									</List.Item>
 								)}
