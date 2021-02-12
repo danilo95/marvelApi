@@ -1,6 +1,7 @@
 const initialState = {
 	listOfStories: [],
 	loading: false,
+	storie: [],
 };
 
 export default (state = initialState, action) => {
@@ -9,6 +10,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				listOfStories: action.payload,
+				loading: false,
+			};
+		case 'GET_SINGLE_STORIE':
+			return {
+				...state,
+				storie: action.payload,
 				loading: false,
 			};
 		case 'LOADING_STORIES':

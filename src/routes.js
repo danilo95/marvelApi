@@ -3,6 +3,7 @@ import Characters from './Components/characters/Characters';
 import Stories from './Components/stories/Stories';
 import SelectedComic from './Components/selectedComic/SelectedComic';
 import SelectedCharacter from './Components/selectedCharacter/SelectedCharacter';
+import SelectedStorie from './Components/selectedStorie/SelectedStorie';
 
 import PublicRoute from './Components/publicRoute/PublicRoute';
 
@@ -48,5 +49,12 @@ export default [
 		exact: true,
 		type: PublicRoute,
 		component: SelectedCharacter,
+	},
+	{
+		key: 7,
+		path: '/storie/:id',
+		exact: true,
+		type: PublicRoute,
+		component: SelectedStorie,
 	},
 ];

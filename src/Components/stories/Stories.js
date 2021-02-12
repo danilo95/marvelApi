@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import { getAllStories, loadingCharacters } from '../../Actions/StoriesActions';
 import { useDispatch, useSelector } from 'react-redux';
+import History from '../history/History';
 import { List, Skeleton } from 'antd';
 
-import { ContentWrapper } from '../globalStyles/Index';
+import { Title, ContentWrapper, Show } from '../globalStyles/Index';
+
+const handleDetails = (id) => {
+	History.push(`/storie/${id}`);
+};
 
 const Stories = () => {
 	const dispatch = useDispatch();
@@ -15,6 +20,7 @@ const Stories = () => {
 	}, []);
 	return (
 		<ContentWrapper>
+			<Title>Stories</Title>
 			<List
 				loading={loading}
 				style={{ width: '1000%' }}
@@ -24,8 +30,10 @@ const Stories = () => {
 				renderItem={(item) => (
 					<List.Item
 						actions={[
-							<a key="list-loadmore-edit">show</a>,
-							<a key="list-loadmore-more">save</a>,
+							<Show onClick={() => handleDetails(item.id)}>
+								show
+							</Show>,
+							<Show>save</Show>,
 						]}
 					>
 						<Skeleton

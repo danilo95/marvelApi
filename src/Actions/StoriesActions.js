@@ -1,4 +1,4 @@
-import { getStories } from '../Components/api/Api';
+import { getStories, getSingleStorie } from '../Components/api/Api';
 
 export const getAllStories = () => async (dispatch) => {
 	const response = await getStories();
@@ -8,4 +8,10 @@ export const getAllStories = () => async (dispatch) => {
 
 export const loadingCharacters = () => (dispatch) => {
 	dispatch({ type: 'LOADING_STORIES', payload: true });
+};
+
+export const getStorie = (id) => async (dispatch) => {
+	const response = await getSingleStorie(id);
+	dispatch({ type: 'GET_SINGLE_STORIE', payload: response.data });
+	dispatch({ type: 'LOADING_STORIES', payload: false });
 };

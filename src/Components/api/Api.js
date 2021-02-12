@@ -78,3 +78,18 @@ export const getStories = () => {
 
 	return result;
 };
+
+export const getSingleStorie = (id) => {
+	let result = url
+		.get(
+			`/stories/${id}?ts=${ts}&apikey=${marvelApi.publicKey}&hash=${hash}`
+		)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
