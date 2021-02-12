@@ -1,6 +1,7 @@
 const initialState = {
 	listOfComics: [],
 	loading: false,
+	comic: [],
 };
 
 export default (state = initialState, action) => {
@@ -11,11 +12,18 @@ export default (state = initialState, action) => {
 				listOfComics: action.payload,
 				loading: false,
 			};
+		case 'GET_SINGLE_COMIC':
+			return {
+				...state,
+				comic: action.payload,
+				loading: false,
+			};
 		case 'LOADING_COMICS':
 			return {
 				...state,
 				loading: action.payload,
 			};
+
 		default:
 			return state;
 	}

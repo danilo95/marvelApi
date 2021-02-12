@@ -23,6 +23,21 @@ export const getComics = () => {
 	return result;
 };
 
+export const getSingleComic = (id) => {
+	let result = url
+		.get(
+			`/comics/${id}?ts=${ts}&apikey=${marvelApi.publicKey}&hash=${hash}`
+		)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
+
 export const getCharacters = () => {
 	let result = url
 		.get(`/characters?ts=${ts}&apikey=${marvelApi.publicKey}&hash=${hash}`)

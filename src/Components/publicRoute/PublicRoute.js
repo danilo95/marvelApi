@@ -14,7 +14,7 @@ const PublicRoute = ({ component: Component, path }) => {
 		const key = event.key;
 		setSelectedKey(key);
 		setContentIndex(+key);
-		History.push(topics[key]);
+		History.push(`/${topics[key]}`);
 	};
 
 	const Menu = (
