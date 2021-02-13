@@ -9,7 +9,7 @@ let ts = 1;
 let hash = CryptoJS.MD5(
 	`${ts}${marvelApi.privateKey}${marvelApi.publicKey}`
 ).toString(CryptoJS.enc.Hex);
-
+//https://gateway.marvel.com:443/v1/public/comics?format=comic&title=Ghost%20Rider&orderBy=issueNumber&apikey=86547ece7deb67d3c2b8fec461fbd9b1
 export const getComics = () => {
 	let result = url
 		.get(`/comics?ts=${ts}&apikey=${marvelApi.publicKey}&hash=${hash}`)

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from '../card/Card';
 import History from '../history/History';
 import LoadingView from '../loadingView/LoadingView';
+import ComicsFilters from '../comicsFilters/ComicsFilters';
 import { ContentWrapper } from '../globalStyles/Index';
 
 const Comics = () => {
@@ -21,6 +22,7 @@ const Comics = () => {
 
 	return (
 		<ContentWrapper>
+			<ComicsFilters />
 			{loading && <LoadingView />}
 			{!loading &&
 				listOfComics?.results?.map((value) => (

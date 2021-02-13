@@ -1,7 +1,12 @@
-export const convertDate = (inputFormat) => {
-	function pad(s) {
-		return s < 10 ? '0' + s : s;
-	}
-	var d = new Date(inputFormat);
-	return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+export const generateQueryParams = (obj) => {
+	var str = [];
+	for (var key in obj)
+		if (obj.hasOwnProperty(key)) {
+			if (obj[key]) {
+				str.push(
+					encodeURIComponent(key) + '=' + encodeURIComponent(obj[key])
+				);
+			}
+		}
+	return str.join('&');
 };
