@@ -1,7 +1,10 @@
 import { getCharacters, getSingleCharacter } from '../Components/api/Api';
 
-export const getAllCharacters = () => async (dispatch) => {
-	const response = await getCharacters();
+export const getAllCharacters = (params, offSet) => async (dispatch) => {
+	if (!offSet) {
+		offSet = 0;
+	}
+	const response = await getCharacters(params, offSet);
 	dispatch({ type: 'GET_ALL_CHARACTERS', payload: response.data });
 	dispatch({ type: 'LOADING_CHARACTERS', payload: false });
 };

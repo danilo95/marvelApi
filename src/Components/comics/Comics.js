@@ -53,15 +53,16 @@ const Comics = () => {
 						height={'400px'}
 					/>
 				))}
-
-			<Footer>
-				<Pagination
-					defaultCurrent={1}
-					total={total || 0 / 20}
-					simple={true}
-					onChange={handlePagination}
-				/>
-			</Footer>
+			{listOfComics?.results?.length > 0 && (
+				<Footer>
+					<Pagination
+						defaultCurrent={1}
+						total={total || 0 / 20}
+						simple={true}
+						onChange={handlePagination}
+					/>
+				</Footer>
+			)}
 		</ContentWrapper>
 	);
 };
