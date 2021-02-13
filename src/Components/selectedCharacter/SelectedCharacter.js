@@ -70,44 +70,47 @@ const SelectedCharacter = () => {
 		dispatch(getCharacterStories(id, offSetStories + 20));
 	};
 
-	const loadMoreComics = !loadingComics ? (
-		<div
-			style={{
-				textAlign: 'center',
-				marginTop: 12,
-				height: 32,
-				lineHeight: '32px',
-			}}
-		>
-			<Button onClick={onLoadMoreComics}>More Comics</Button>
-		</div>
-	) : null;
+	const loadMoreComics =
+		!loadingComics && total > offset + 20 ? (
+			<div
+				style={{
+					textAlign: 'center',
+					marginTop: 12,
+					height: 32,
+					lineHeight: '32px',
+				}}
+			>
+				<Button onClick={onLoadMoreComics}>More Comics</Button>
+			</div>
+		) : null;
 
-	const loadMoreSeries = !loadingComics ? (
-		<div
-			style={{
-				textAlign: 'center',
-				marginTop: 12,
-				height: 32,
-				lineHeight: '32px',
-			}}
-		>
-			<Button onClick={onLoadMoreSeries}>More Series</Button>
-		</div>
-	) : null;
+	const loadMoreSeries =
+		!loadingSeries && totalSeries > offSetSeries + 20 ? (
+			<div
+				style={{
+					textAlign: 'center',
+					marginTop: 12,
+					height: 32,
+					lineHeight: '32px',
+				}}
+			>
+				<Button onClick={onLoadMoreSeries}>More Series</Button>
+			</div>
+		) : null;
 
-	const loadMoreStories = !loadingComics ? (
-		<div
-			style={{
-				textAlign: 'center',
-				marginTop: 12,
-				height: 32,
-				lineHeight: '32px',
-			}}
-		>
-			<Button onClick={onLoadMoreStories}>More Stories</Button>
-		</div>
-	) : null;
+	const loadMoreStories =
+		!loadingStories && totalStories > offSetStories + 20 ? (
+			<div
+				style={{
+					textAlign: 'center',
+					marginTop: 12,
+					height: 32,
+					lineHeight: '32px',
+				}}
+			>
+				<Button onClick={onLoadMoreStories}>More Stories</Button>
+			</div>
+		) : null;
 
 	return (
 		<div>
