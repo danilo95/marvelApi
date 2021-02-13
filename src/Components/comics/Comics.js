@@ -60,6 +60,7 @@ const Comics = () => {
 						total={total || 0 / 20}
 						simple={true}
 						onChange={handlePagination}
+						defaultPageSize={20}
 					/>
 				</Footer>
 			)}
