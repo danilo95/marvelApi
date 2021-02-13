@@ -4,6 +4,8 @@ import {
 	loadingCharacters,
 	loadingComicsFromStorie,
 	getComicsFromStorie,
+	loadingSeriesFromStorie,
+	getSeriesFromStorie,
 } from '../../Actions/StoriesActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,11 +17,17 @@ import { Title } from '../globalStyles/Index';
 
 const SelectedStorie = () => {
 	let { id } = useParams();
-	const { storie, loading, comics, loadingComics } = useSelector(
-		(state) => state.stories
-	);
+	const {
+		storie,
+		loading,
+		comics,
+		loadingComics,
+		series,
+		loadingSeries,
+	} = useSelector((state) => state.stories);
 	let { results } = storie;
 	let { total, offset } = comics;
+	let { total: totalSeries, offset: offSetSeries } = series;
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -27,6 +35,8 @@ const SelectedStorie = () => {
 		dispatch(getStorie(id));
 		dispatch(loadingComicsFromStorie());
 		dispatch(getComicsFromStorie(id, 0));
+		dispatch(loadingSeriesFromStorie());
+		dispatch(getSeriesFromStorie(id, 0));
 	}, []);
 
 	const Content = ({ children }) => (
@@ -43,6 +53,10 @@ const SelectedStorie = () => {
 		dispatch(loadingComicsFromStorie());
 		dispatch(getComicsFromStorie(id, offset + 20));
 	};
+	const onLoadMoreSeries = () => {
+		dispatch(loadingSeriesFromStorie());
+		dispatch(getSeriesFromStorie(id, offset + 20));
+	};
 
 	const loadMoreComics =
 		!loadingComics && total > offset + 20 ? (
@@ -58,6 +72,19 @@ const SelectedStorie = () => {
 			</div>
 		) : null;
 
+	const loadMoreSeries =
+		!loadingSeries && totalSeries > offSetSeries + 20 ? (
+			<div
+				style={{
+					textAlign: 'center',
+					marginTop: 12,
+					height: 32,
+					lineHeight: '32px',
+				}}
+			>
+				<Button onClick={onLoadMoreSeries}>More Series</Button>
+			</div>
+		) : null;
 	return (
 		<div>
 			{loading && <LoadingView />}
@@ -72,6 +99,9 @@ const SelectedStorie = () => {
 						loadingComics={loadingComics}
 						loadMoreComics={loadMoreComics}
 						handleRedirect={handleRedirect}
+						characterSeries={series?.results}
+						loadingSeries={loadingSeries}
+						loadMoreSeries={loadMoreSeries}
 					/>
 				</div>
 			)}
