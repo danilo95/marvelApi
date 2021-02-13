@@ -8,10 +8,10 @@ import {
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
-import { PageHeader, Image, Row, List, Tabs, Button } from 'antd';
+import InformationTab from '../informationTab/InformationTab';
+import { PageHeader, Image, Row, Button } from 'antd';
 import History from '../history/History';
-import { Title, Show } from '../globalStyles/Index';
-const { TabPane } = Tabs;
+import { Title } from '../globalStyles/Index';
 
 const SelectedCharacter = () => {
 	let { id } = useParams();
@@ -41,12 +41,12 @@ const SelectedCharacter = () => {
 		</Row>
 	);
 
-	const onLoadMore = () => {
+	const onLoadMoreComics = () => {
 		dispatch(loadingCharactersComics());
 		dispatch(getCharacterComics(id, offset + 20));
 	};
 
-	const loadMore = !loadingComics ? (
+	const loadMoreComics = !loadingComics ? (
 		<div
 			style={{
 				textAlign: 'center',
@@ -55,7 +55,7 @@ const SelectedCharacter = () => {
 				lineHeight: '32px',
 			}}
 		>
-			<Button onClick={onLoadMore}>More Comics</Button>
+			<Button onClick={onLoadMoreComics}>More Comics</Button>
 		</div>
 	) : null;
 
@@ -77,127 +77,11 @@ const SelectedCharacter = () => {
 						</Content>
 					</PageHeader>
 					<Title>Information</Title>
-					<Tabs defaultActiveKey="1">
-						<TabPane tab="Series" key="1">
-							<List
-								itemLayout="horizontal"
-								dataSource={results[0]?.series?.items}
-								renderItem={(item) => (
-									<List.Item
-										actions={[
-											<Show
-												onClick={() =>
-													handleRedirect(
-														'serie',
-														'/series/',
-														item.resourceURI
-													)
-												}
-											>
-												Show
-											</Show>,
-										]}
-									>
-										<List.Item.Meta
-											title={
-												<Show
-													onClick={() =>
-														handleRedirect(
-															'serie',
-															'/series/',
-															item.resourceURI
-														)
-													}
-												>
-													{item.name}
-												</Show>
-											}
-										/>
-									</List.Item>
-								)}
-							/>
-						</TabPane>
-						<TabPane tab="Stories" key="2">
-							<List
-								itemLayout="horizontal"
-								dataSource={results[0]?.stories?.items}
-								renderItem={(item) => (
-									<List.Item
-										actions={[
-											<Show
-												onClick={() =>
-													handleRedirect(
-														'storie',
-														'/stories/',
-														item.resourceURI
-													)
-												}
-											>
-												Show
-											</Show>,
-										]}
-									>
-										<List.Item.Meta
-											title={
-												<Show
-													onClick={() =>
-														handleRedirect(
-															'storie',
-															'/stories/',
-															item.resourceURI
-														)
-													}
-												>
-													{item.name}
-												</Show>
-											}
-										/>
-									</List.Item>
-								)}
-							/>
-						</TabPane>
-						<TabPane tab="Comics" key="3">
-							<List
-								itemLayout="horizontal"
-								dataSource={characterComics?.results}
-								loading={loadingComics}
-								loadMore={loadMore}
-								renderItem={(item) => (
-									<List.Item
-										actions={[
-											<Show
-												onClick={() =>
-													handleRedirect(
-														'storie',
-														'/stories/',
-														item.resourceURI
-													)
-												}
-											>
-												Show
-											</Show>,
-										]}
-									>
-										<List.Item.Meta
-											title={
-												<Show
-													onClick={() =>
-														handleRedirect(
-															'storie',
-															'/stories/',
-															item.resourceURI
-														)
-													}
-												>
-													{item.title}
-												</Show>
-											}
-										/>
-									</List.Item>
-								)}
-							/>
-						</TabPane>
-					</Tabs>
+					<InformationTab
+						characterComics={characterComics?.results}
+						loadingComics={loadingComics}
+						loadMoreComics={loadMoreComics}
+					/>
 				</div>
 			)}
 		</div>
