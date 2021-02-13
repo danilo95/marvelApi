@@ -2,25 +2,31 @@ import React, { useEffect } from 'react';
 import {
 	getCharacterById,
 	loadingCharacters,
+	loadingCharactersComics,
+	getCharacterComics,
 } from '../../Actions/CharactersActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
-import { PageHeader, Image, Row, List, Tabs } from 'antd';
+import { PageHeader, Image, Row, List, Tabs, Button } from 'antd';
 import History from '../history/History';
 import { Title, Show } from '../globalStyles/Index';
 const { TabPane } = Tabs;
 
 const SelectedCharacter = () => {
 	let { id } = useParams();
-	const { character, loading } = useSelector((state) => state.characters);
+	const { character, loading, characterComics, loadingComics } = useSelector(
+		(state) => state.characters
+	);
+	let { total, offset } = characterComics;
 	let { results } = character;
-	console.log(results);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(loadingCharacters());
 		dispatch(getCharacterById(id));
+		dispatch(loadingCharactersComics());
+		dispatch(getCharacterComics(id, 0));
 	}, []);
 
 	const handleRedirect = (path, regex, id) => {
@@ -34,6 +40,24 @@ const SelectedCharacter = () => {
 			<div style={{ flex: 1, padding: 10 }}>{children}</div>
 		</Row>
 	);
+
+	const onLoadMore = () => {
+		dispatch(loadingCharactersComics());
+		dispatch(getCharacterComics(id, offset + 20));
+	};
+
+	const loadMore = !loadingComics ? (
+		<div
+			style={{
+				textAlign: 'center',
+				marginTop: 12,
+				height: 32,
+				lineHeight: '32px',
+			}}
+		>
+			<Button onClick={onLoadMore}>More Comics</Button>
+		</div>
+	) : null;
 
 	return (
 		<div>
@@ -125,6 +149,47 @@ const SelectedCharacter = () => {
 													}
 												>
 													{item.name}
+												</Show>
+											}
+										/>
+									</List.Item>
+								)}
+							/>
+						</TabPane>
+						<TabPane tab="Comics" key="3">
+							<List
+								itemLayout="horizontal"
+								dataSource={characterComics?.results}
+								loading={loadingComics}
+								loadMore={loadMore}
+								renderItem={(item) => (
+									<List.Item
+										actions={[
+											<Show
+												onClick={() =>
+													handleRedirect(
+														'storie',
+														'/stories/',
+														item.resourceURI
+													)
+												}
+											>
+												Show
+											</Show>,
+										]}
+									>
+										<List.Item.Meta
+											title={
+												<Show
+													onClick={() =>
+														handleRedirect(
+															'storie',
+															'/stories/',
+															item.resourceURI
+														)
+													}
+												>
+													{item.title}
 												</Show>
 											}
 										/>

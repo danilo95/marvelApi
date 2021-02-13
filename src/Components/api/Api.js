@@ -44,6 +44,19 @@ export const getSingleComic = (id) => {
 	return result;
 };
 
+export const getComicsPerChracter = (id, offSet) => {
+	let result = url
+		.get(`/characters/${id}/comics?offset=${offSet}&${options}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
+
 export const getCharacters = (params, offSet) => {
 	if (params) {
 		request = `?${params}&offset=${offSet}&${options}`;
