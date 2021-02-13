@@ -15,7 +15,6 @@ export const loadingCharacters = () => (dispatch) => {
 
 export const getCharacterById = (id) => async (dispatch) => {
 	const response = await getSingleCharacter(id);
-	dispatch({ type: 'LOADING_CHARACTERS', payload: true });
 	dispatch({ type: 'GET_SINGLE_CHARACTER', payload: response.data });
 	dispatch({ type: 'LOADING_CHARACTERS', payload: false });
 };

@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { getCharacterById } from '../../Actions/CharactersActions';
+import {
+	getCharacterById,
+	loadingCharacters,
+} from '../../Actions/CharactersActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
@@ -16,6 +19,7 @@ const SelectedCharacter = () => {
 
 	const dispatch = useDispatch();
 	useEffect(() => {
+		dispatch(loadingCharacters());
 		dispatch(getCharacterById(id));
 	}, []);
 
