@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Input, Checkbox, Select, InputNumber } from 'antd';
+import { getAllComics, loadingComics } from '../../Actions/ComicsActions';
 import { generateQueryParams } from '../utils/Utils';
+import { useDispatch } from 'react-redux';
 import { FilterOutlined } from '@ant-design/icons';
 import {
 	FilterContainer,
@@ -13,12 +15,15 @@ const { Search } = Input;
 const { Option } = Select;
 
 const ComicsFilters = () => {
+	const dispatch = useDispatch();
 	const [activeFilter, setActiveFilter] = useState(false);
 	const [filters, setFilters] = useState({
 		format: '',
 		title: '',
 		orderBy: '',
+		issueNumber: '',
 	});
+
 	const changeFilterState = () => {
 		setActiveFilter(!activeFilter);
 	};
@@ -26,7 +31,9 @@ const ComicsFilters = () => {
 		let tempData = filters;
 		tempData['title'] = value;
 		setFilters({ ...tempData });
-		console.log(generateQueryParams(tempData));
+		let queryParams = generateQueryParams(tempData);
+		dispatch(loadingComics());
+		dispatch(getAllComics(queryParams));
 	};
 
 	const handleSelect = (value) => {
@@ -41,6 +48,12 @@ const ComicsFilters = () => {
 		} else {
 			tempData['orderBy'] = '';
 		}
+		setFilters({ ...tempData });
+	};
+
+	const handleIssueNumber = (value) => {
+		let tempData = filters;
+		tempData['issueNumber'] = value;
 		setFilters({ ...tempData });
 	};
 
@@ -87,7 +100,7 @@ const ComicsFilters = () => {
 					</div>
 					<div>
 						<p>Add a issue number</p>
-						<InputNumber min={0} onChange={console.log(1)} />
+						<InputNumber min={0} onChange={handleIssueNumber} />
 					</div>
 				</FilterOptions>
 			</FiltersWrapper>
