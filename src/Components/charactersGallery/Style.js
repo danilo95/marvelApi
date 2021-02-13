@@ -16,3 +16,9 @@ export const CharacterWrapperGallery = styled.div`
 export const CardContainer = styled.div`
 	cursor: pointer;
 `;
+
+export const EmptyMessage = styled.div`
+	width: 100%;
+	padding: 16px 24px;
+	text-align: center;
+`;

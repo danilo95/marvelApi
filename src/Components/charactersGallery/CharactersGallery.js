@@ -1,11 +1,14 @@
 import React from 'react';
 import { Skeleton, Card, Avatar } from 'antd';
-import { CharacterWrapperGallery, CardContainer } from './Style';
+import { CharacterWrapperGallery, CardContainer, EmptyMessage } from './Style';
 const { Meta } = Card;
 
 const CharactersGallery = ({ gallery, loading, handleRedirect }) => {
 	return (
 		<CharacterWrapperGallery>
+			{gallery.length === 0 && (
+				<EmptyMessage>No Characters found..</EmptyMessage>
+			)}
 			<Skeleton loading={loading} />
 			{gallery.map((value) => (
 				<CardContainer
