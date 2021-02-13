@@ -57,6 +57,32 @@ export const getComicsPerChracter = (id, offSet) => {
 	return result;
 };
 
+export const getSeriesPerChracter = (id, offSet) => {
+	let result = url
+		.get(`/characters/${id}/series?offset=${offSet}&${options}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
+
+export const getStoriesPerChracter = (id, offSet) => {
+	let result = url
+		.get(`/characters/${id}/stories?offset=${offSet}&${options}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
+
 export const getCharacters = (params, offSet) => {
 	if (params) {
 		request = `?${params}&offset=${offSet}&${options}`;

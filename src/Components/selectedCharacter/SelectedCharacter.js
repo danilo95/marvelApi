@@ -4,6 +4,10 @@ import {
 	loadingCharacters,
 	loadingCharactersComics,
 	getCharacterComics,
+	loadingCharactersSeries,
+	getCharacterSeries,
+	loadingCharactersStories,
+	getCharacterStories,
 } from '../../Actions/CharactersActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,10 +19,19 @@ import { Title } from '../globalStyles/Index';
 
 const SelectedCharacter = () => {
 	let { id } = useParams();
-	const { character, loading, characterComics, loadingComics } = useSelector(
-		(state) => state.characters
-	);
+	const {
+		character,
+		loading,
+		characterComics,
+		loadingComics,
+		characterSeries,
+		loadingSeries,
+		characterStories,
+		loadingStories,
+	} = useSelector((state) => state.characters);
 	let { total, offset } = characterComics;
+	let { total: totalSeries, offset: offSetSeries } = characterSeries;
+	let { total: totalStories, offset: offSetStories } = characterStories;
 	let { results } = character;
 
 	const dispatch = useDispatch();
@@ -27,11 +40,14 @@ const SelectedCharacter = () => {
 		dispatch(getCharacterById(id));
 		dispatch(loadingCharactersComics());
 		dispatch(getCharacterComics(id, 0));
+		dispatch(loadingCharactersSeries());
+		dispatch(getCharacterSeries(id, 0));
+		dispatch(loadingCharactersStories());
+		dispatch(getCharacterStories(id, 0));
 	}, []);
 
-	const handleRedirect = (path, regex, id) => {
-		var id = id.replace(new RegExp('.*' + regex), '');
-		History.push(`/${path}/${id}`);
+	const handleRedirect = (path) => {
+		History.push(path);
 	};
 
 	const Content = ({ children, extraContent }) => (
@@ -45,6 +61,14 @@ const SelectedCharacter = () => {
 		dispatch(loadingCharactersComics());
 		dispatch(getCharacterComics(id, offset + 20));
 	};
+	const onLoadMoreSeries = () => {
+		dispatch(loadingCharactersSeries());
+		dispatch(getCharacterSeries(id, offSetSeries + 20));
+	};
+	const onLoadMoreStories = () => {
+		dispatch(loadingCharactersStories());
+		dispatch(getCharacterStories(id, offSetStories + 20));
+	};
 
 	const loadMoreComics = !loadingComics ? (
 		<div
@@ -56,6 +80,32 @@ const SelectedCharacter = () => {
 			}}
 		>
 			<Button onClick={onLoadMoreComics}>More Comics</Button>
+		</div>
+	) : null;
+
+	const loadMoreSeries = !loadingComics ? (
+		<div
+			style={{
+				textAlign: 'center',
+				marginTop: 12,
+				height: 32,
+				lineHeight: '32px',
+			}}
+		>
+			<Button onClick={onLoadMoreSeries}>More Series</Button>
+		</div>
+	) : null;
+
+	const loadMoreStories = !loadingComics ? (
+		<div
+			style={{
+				textAlign: 'center',
+				marginTop: 12,
+				height: 32,
+				lineHeight: '32px',
+			}}
+		>
+			<Button onClick={onLoadMoreStories}>More Stories</Button>
 		</div>
 	) : null;
 
@@ -81,6 +131,13 @@ const SelectedCharacter = () => {
 						characterComics={characterComics?.results}
 						loadingComics={loadingComics}
 						loadMoreComics={loadMoreComics}
+						characterSeries={characterSeries?.results}
+						loadingSeries={loadingSeries}
+						loadMoreSeries={loadMoreSeries}
+						characterStories={characterStories?.results}
+						loadingStories={loadingStories}
+						loadMoreStories={loadMoreStories}
+						handleRedirect={handleRedirect}
 					/>
 				</div>
 			)}

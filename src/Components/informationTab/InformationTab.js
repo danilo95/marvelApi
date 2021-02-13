@@ -3,17 +3,34 @@ import { Tabs, List } from 'antd';
 import { Show } from '../globalStyles/Index';
 const { TabPane } = Tabs;
 
-const InformationTab = ({ characterComics, loadingComics, loadMoreComics }) => {
+const InformationTab = ({
+	characterComics,
+	loadingComics,
+	loadMoreComics,
+	characterSeries,
+	loadingSeries,
+	loadMoreSeries,
+	characterStories,
+	loadingStories,
+	loadMoreStories,
+	handleRedirect,
+}) => {
 	return (
 		<Tabs defaultActiveKey="1">
 			<TabPane tab="Series" key="1">
 				<List
 					itemLayout="horizontal"
-					dataSource={[]}
+					dataSource={characterSeries || []}
+					loading={loadingSeries}
+					loadMore={loadMoreSeries}
 					renderItem={(item) => (
 						<List.Item
 							actions={[
-								<Show onClick={() => console.log('series')}>
+								<Show
+									onClick={() =>
+										handleRedirect(`/serie/${item.id}`)
+									}
+								>
 									Show
 								</Show>,
 							]}
@@ -21,9 +38,11 @@ const InformationTab = ({ characterComics, loadingComics, loadMoreComics }) => {
 							<List.Item.Meta
 								title={
 									<Show
-										onClick={() => console.log('redirect')}
+										onClick={() =>
+											handleRedirect(`/serie/${item.id}`)
+										}
 									>
-										titulo
+										{item.title}
 									</Show>
 								}
 							/>
@@ -34,11 +53,17 @@ const InformationTab = ({ characterComics, loadingComics, loadMoreComics }) => {
 			<TabPane tab="Stories" key="2">
 				<List
 					itemLayout="horizontal"
-					dataSource={[]}
+					dataSource={characterStories || []}
+					loading={loadingStories}
+					loadMore={loadMoreStories}
 					renderItem={(item) => (
 						<List.Item
 							actions={[
-								<Show onClick={() => console.log('redirect')}>
+								<Show
+									onClick={() =>
+										handleRedirect(`/storie/${item.id}`)
+									}
+								>
 									Show
 								</Show>,
 							]}
@@ -46,9 +71,11 @@ const InformationTab = ({ characterComics, loadingComics, loadMoreComics }) => {
 							<List.Item.Meta
 								title={
 									<Show
-										onClick={() => console.log('redirect')}
+										onClick={() =>
+											handleRedirect(`/storie/${item.id}`)
+										}
 									>
-										titulo
+										{item.title}
 									</Show>
 								}
 							/>
@@ -65,7 +92,11 @@ const InformationTab = ({ characterComics, loadingComics, loadMoreComics }) => {
 					renderItem={(item) => (
 						<List.Item
 							actions={[
-								<Show onClick={() => console.log('redirigir')}>
+								<Show
+									onClick={() =>
+										handleRedirect(`/comic/${item.id}`)
+									}
+								>
 									Show
 								</Show>,
 							]}
@@ -73,7 +104,9 @@ const InformationTab = ({ characterComics, loadingComics, loadMoreComics }) => {
 							<List.Item.Meta
 								title={
 									<Show
-										onClick={() => console.log('redirigir')}
+										onClick={() =>
+											handleRedirect(`/comic/${item.id}`)
+										}
 									>
 										{item.title}
 									</Show>
