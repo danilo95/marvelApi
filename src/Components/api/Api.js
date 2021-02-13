@@ -11,12 +11,12 @@ let hash = CryptoJS.MD5(
 ).toString(CryptoJS.enc.Hex);
 //https://gateway.marvel.com:443/v1/public/comics?format=comic&title=Ghost%20Rider&orderBy=issueNumber&apikey=86547ece7deb67d3c2b8fec461fbd9b1
 let options = `ts=${ts}&apikey=${marvelApi.publicKey}&hash=${hash}`;
-export const getComics = (params) => {
+export const getComics = (params, offSet) => {
 	let request = '';
 	if (params) {
-		request = `?${params}&${options}`;
+		request = `?${params}&offset=${offSet}&${options}`;
 	} else {
-		request = `?${options}`;
+		request = `?offset=${offSet}&${options}`;
 	}
 	let result = url
 		.get(`/comics${request}`)

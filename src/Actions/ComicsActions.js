@@ -1,7 +1,10 @@
 import { getComics, getSingleComic } from '../Components/api/Api';
 
-export const getAllComics = (params) => async (dispatch) => {
-	const response = await getComics(params);
+export const getAllComics = (params, offSet) => async (dispatch) => {
+	if (!offSet) {
+		offSet = 0;
+	}
+	const response = await getComics(params, offSet);
 	dispatch({ type: 'GET_ALL_COMICS', payload: response.data });
 	dispatch({ type: 'LOADING_COMICS', payload: false });
 };
