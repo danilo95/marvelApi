@@ -1,23 +1,32 @@
 import React, { useEffect } from 'react';
-import { getStorie, loadingCharacters } from '../../Actions/StoriesActions';
+import {
+	getStorie,
+	loadingCharacters,
+	loadingComicsFromStorie,
+	getComicsFromStorie,
+} from '../../Actions/StoriesActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
+import InformationTab from '../informationTab/InformationTab';
 import History from '../history/History';
-import { PageHeader, Row, List, Tabs } from 'antd';
-import { Title, Show } from '../globalStyles/Index';
-
-const { TabPane } = Tabs;
+import { PageHeader, Tag, Row, Button } from 'antd';
+import { Title } from '../globalStyles/Index';
 
 const SelectedStorie = () => {
 	let { id } = useParams();
-	const { storie, loading } = useSelector((state) => state.stories);
+	const { storie, loading, comics, loadingComics } = useSelector(
+		(state) => state.stories
+	);
 	let { results } = storie;
+	let { total, offset } = comics;
 
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(loadingCharacters());
 		dispatch(getStorie(id));
+		dispatch(loadingComicsFromStorie());
+		dispatch(getComicsFromStorie(id, 0));
 	}, []);
 
 	const Content = ({ children }) => (
@@ -26,10 +35,28 @@ const SelectedStorie = () => {
 		</Row>
 	);
 
-	const handleRedirect = (path, regex, id) => {
-		var id = id.replace(new RegExp('.*' + regex), '');
-		History.push(`/${path}/${id}`);
+	const handleRedirect = (path) => {
+		History.push(path);
 	};
+
+	const onLoadMoreComics = () => {
+		dispatch(loadingComicsFromStorie());
+		dispatch(getComicsFromStorie(id, offset + 20));
+	};
+
+	const loadMoreComics =
+		!loadingComics && total > offset + 20 ? (
+			<div
+				style={{
+					textAlign: 'center',
+					marginTop: 12,
+					height: 32,
+					lineHeight: '32px',
+				}}
+			>
+				<Button onClick={onLoadMoreComics}>More Comics</Button>
+			</div>
+		) : null;
 
 	return (
 		<div>
@@ -40,125 +67,12 @@ const SelectedStorie = () => {
 						<Content>{results[0]?.description}</Content>
 					</PageHeader>
 					<Title>Information</Title>
-					<Tabs defaultActiveKey="1">
-						<TabPane tab="Series" key="1">
-							<List
-								itemLayout="horizontal"
-								dataSource={results[0]?.series?.items}
-								renderItem={(item) => (
-									<List.Item
-										actions={[
-											<Show
-												onClick={() =>
-													handleRedirect(
-														'serie',
-														'/series/',
-														item.resourceURI
-													)
-												}
-											>
-												Show
-											</Show>,
-										]}
-									>
-										<List.Item.Meta
-											title={
-												<Show
-													onClick={() =>
-														handleRedirect(
-															'serie',
-															'/series/',
-															item.resourceURI
-														)
-													}
-												>
-													{item.name}
-												</Show>
-											}
-										/>
-									</List.Item>
-								)}
-							/>
-						</TabPane>
-						<TabPane tab="Comics" key="2">
-							<List
-								itemLayout="horizontal"
-								dataSource={results[0]?.comics?.items}
-								renderItem={(item) => (
-									<List.Item
-										actions={[
-											<Show
-												onClick={() =>
-													handleRedirect(
-														'comic',
-														'/comics/',
-														item.resourceURI
-													)
-												}
-											>
-												Show
-											</Show>,
-										]}
-									>
-										<List.Item.Meta
-											title={
-												<Show
-													onClick={() =>
-														handleRedirect(
-															'comic',
-															'/comics/',
-															item.resourceURI
-														)
-													}
-												>
-													{item.name}
-												</Show>
-											}
-										/>
-									</List.Item>
-								)}
-							/>
-						</TabPane>
-						<TabPane tab="Characters" key="3">
-							<List
-								itemLayout="horizontal"
-								dataSource={results[0]?.characters?.items}
-								renderItem={(item) => (
-									<List.Item
-										actions={[
-											<Show
-												onClick={() =>
-													handleRedirect(
-														'character',
-														'/characters/',
-														item.resourceURI
-													)
-												}
-											>
-												Show
-											</Show>,
-										]}
-									>
-										<List.Item.Meta
-											title={
-												<Show
-													onClick={() =>
-														handleRedirect(
-															'character',
-															'/characters/',
-															item.resourceURI
-														)
-													}
-												>
-													{item.name}
-												</Show>
-											}
-										/>
-									</List.Item>
-								)}
-							/>
-						</TabPane>
-					</Tabs>
+					<InformationTab
+						characterComics={comics?.results}
+						loadingComics={loadingComics}
+						loadMoreComics={loadMoreComics}
+						handleRedirect={handleRedirect}
+					/>
 				</div>
 			)}
 		</div>

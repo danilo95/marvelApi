@@ -1,4 +1,8 @@
-import { getStories, getSingleStorie } from '../Components/api/Api';
+import {
+	getStories,
+	getSingleStorie,
+	getComicsPerStory,
+} from '../Components/api/Api';
 
 export const getAllStories = () => async (dispatch) => {
 	const response = await getStories();
@@ -14,4 +18,14 @@ export const getStorie = (id) => async (dispatch) => {
 	const response = await getSingleStorie(id);
 	dispatch({ type: 'GET_SINGLE_STORIE', payload: response.data });
 	dispatch({ type: 'LOADING_STORIES', payload: false });
+};
+//************** */
+export const loadingComicsFromStorie = () => (dispatch) => {
+	dispatch({ type: 'LOADING_COMICS', payload: true });
+};
+
+export const getComicsFromStorie = (id, offset) => async (dispatch) => {
+	const response = await getComicsPerStory(id, offset);
+	dispatch({ type: 'GET_COMICS_PER_STORIE', payload: response.data });
+	dispatch({ type: 'LOADING_COMICS', payload: false });
 };
