@@ -3,6 +3,8 @@ import {
 	getComicById,
 	loadingComicStories,
 	getComicStories,
+	loadingComicCharacters,
+	getComicCharacters,
 } from '../../Actions/ComicsActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,15 +12,21 @@ import History from '../history/History';
 import LoadingView from '../loadingView/LoadingView';
 import Gallery from '../Gallery/Gallery';
 import InformationTab from '../informationTab/InformationTab';
+import CharactersGallery from '../charactersGallery/CharactersGallery';
 import { PageHeader, Tag, Row, Button } from 'antd';
 
 import { Title } from '../globalStyles/Index';
 
 const SelectedComic = () => {
 	let { id } = useParams();
-	const { comic, loading, loadingStories, comicStories } = useSelector(
-		(state) => state.comics
-	);
+	const {
+		comic,
+		loading,
+		loadingStories,
+		comicStories,
+		comicCharacters,
+		loadingCharacter,
+	} = useSelector((state) => state.comics);
 	let { results } = comic;
 	let { total: totalStories, offset: offSetStories } = comicStories;
 
@@ -27,6 +35,8 @@ const SelectedComic = () => {
 		dispatch(getComicById(id));
 		dispatch(loadingComicStories());
 		dispatch(getComicStories(id, 0));
+		dispatch(loadingComicCharacters());
+		dispatch(getComicCharacters(id));
 	}, []);
 
 	const Content = ({ children }) => (
@@ -71,11 +81,18 @@ const SelectedComic = () => {
 					</PageHeader>
 					<Title>Gallery</Title>
 					<Gallery images={results[0]?.images} />
+					<Title>Characters</Title>
+					<CharactersGallery
+						loading={loadingCharacter}
+						gallery={comicCharacters}
+						handleRedirect={handleRedirect}
+					/>
 					<Title>Information</Title>
 					<InformationTab
 						characterStories={comicStories?.results}
 						loadingStories={loadingStories}
 						loadMoreStories={loadMoreStories}
+						handleRedirect={handleRedirect}
 					/>
 				</div>
 			)}
