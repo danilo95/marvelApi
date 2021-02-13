@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAllComics, loadingComics } from '../../Actions/ComicsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Empty, Pagination } from 'antd';
@@ -6,12 +6,20 @@ import Card from '../card/Card';
 import History from '../history/History';
 import LoadingView from '../loadingView/LoadingView';
 import ComicsFilters from '../comicsFilters/ComicsFilters';
+import { generateQueryParams } from '../utils/Utils';
+
 import { ContentWrapper, Footer } from '../globalStyles/Index';
 
 const Comics = () => {
+	const [filters, setFilters] = useState({
+		format: '',
+		titleStartsWith: '',
+		orderBy: '',
+		issueNumber: '',
+	});
 	const dispatch = useDispatch();
 	const { listOfComics, loading } = useSelector((state) => state.comics);
-	const { total, count, offset } = listOfComics;
+	const { total, count } = listOfComics;
 
 	useEffect(() => {
 		dispatch(loadingComics());
@@ -25,12 +33,12 @@ const Comics = () => {
 		page = page - 1;
 		let newOffset = count * page;
 		dispatch(loadingComics());
-		dispatch(getAllComics(null, newOffset));
+		dispatch(getAllComics(generateQueryParams(filters), newOffset));
 	};
 
 	return (
 		<ContentWrapper>
-			<ComicsFilters />
+			<ComicsFilters filters={filters} setFilters={setFilters} />
 			{loading && <LoadingView />}
 			{listOfComics?.results?.length === 0 && <Empty />}
 			{!loading &&

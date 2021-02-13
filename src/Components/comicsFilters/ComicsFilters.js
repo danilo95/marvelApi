@@ -14,22 +14,16 @@ import {
 const { Search } = Input;
 const { Option } = Select;
 
-const ComicsFilters = () => {
+const ComicsFilters = ({ filters, setFilters }) => {
 	const dispatch = useDispatch();
 	const [activeFilter, setActiveFilter] = useState(false);
-	const [filters, setFilters] = useState({
-		format: '',
-		title: '',
-		orderBy: '',
-		issueNumber: '',
-	});
 
 	const changeFilterState = () => {
 		setActiveFilter(!activeFilter);
 	};
 	const onSearch = (value) => {
 		let tempData = filters;
-		tempData['title'] = value;
+		tempData['titleStartsWith'] = value;
 		setFilters({ ...tempData });
 		let queryParams = generateQueryParams(tempData);
 		dispatch(loadingComics());
