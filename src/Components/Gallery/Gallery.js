@@ -1,9 +1,10 @@
 import React from 'react';
 import { Image } from 'antd';
+import { GalleryContainer } from './Style';
 
 const Gallery = ({ images }) => {
 	return (
-		<div>
+		<GalleryContainer>
 			{images.map((value, index) => (
 				<Image
 					key={index}
@@ -11,7 +12,7 @@ const Gallery = ({ images }) => {
 					src={`${value.path}.${value.extension}`}
 				/>
 			))}
-		</div>
+		</GalleryContainer>
 	);
 };
 

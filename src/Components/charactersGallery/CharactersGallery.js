@@ -12,9 +12,9 @@ const CharactersGallery = ({ gallery, loading, handleRedirect }) => {
 					onClick={() => {
 						handleRedirect(`/character/${value.id}`);
 					}}
+					key={value.id}
 				>
 					<Card
-						key={value.id}
 						cover={
 							<img
 								alt="super-hero"
