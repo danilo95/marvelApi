@@ -1,4 +1,8 @@
-import { getComics, getSingleComic } from '../Components/api/Api';
+import {
+	getComics,
+	getSingleComic,
+	getStoriesPerComic,
+} from '../Components/api/Api';
 
 export const getAllComics = (params, offSet) => async (dispatch) => {
 	if (!offSet) {
@@ -18,4 +22,14 @@ export const getComicById = (id) => async (dispatch) => {
 	dispatch({ type: 'LOADING_COMICS', payload: true });
 	dispatch({ type: 'GET_SINGLE_COMIC', payload: response.data });
 	dispatch({ type: 'LOADING_COMICS', payload: false });
+};
+
+export const loadingComicStories = () => (dispatch) => {
+	dispatch({ type: 'LOADING_COMICS_STORIES', payload: true });
+};
+
+export const getComicStories = (id, offset) => async (dispatch) => {
+	const response = await getStoriesPerComic(id, offset);
+	dispatch({ type: 'GET_STORIES_PER_COMIC', payload: response.data });
+	dispatch({ type: 'LOADING_COMICS_STORIES', payload: false });
 };

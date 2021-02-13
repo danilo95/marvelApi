@@ -2,6 +2,8 @@ const initialState = {
 	listOfComics: [],
 	loading: false,
 	comic: [],
+	comicStories: [],
+	loadingStories: false,
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +19,17 @@ export default (state = initialState, action) => {
 				...state,
 				comic: action.payload,
 				loading: false,
+			};
+		case 'GET_STORIES_PER_COMIC':
+			return {
+				...state,
+				comicStories: action.payload,
+				loadingStories: false,
+			};
+		case 'LOADING_COMICS_STORIES':
+			return {
+				...state,
+				loadingStories: action.payload,
 			};
 		case 'LOADING_COMICS':
 			return {

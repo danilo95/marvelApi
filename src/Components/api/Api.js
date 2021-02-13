@@ -70,6 +70,19 @@ export const getSeriesPerChracter = (id, offSet) => {
 	return result;
 };
 
+export const getStoriesPerComic = (id, offSet) => {
+	let result = url
+		.get(`/comics/${id}/stories?offset=${offSet}&${options}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
+
 export const getStoriesPerChracter = (id, offSet) => {
 	let result = url
 		.get(`/characters/${id}/stories?offset=${offSet}&${options}`)
