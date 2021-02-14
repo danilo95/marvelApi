@@ -16,3 +16,9 @@ export const saveFavorite = (id, title, type, img) => {
 	favorites = [...favorites, { id, title, type, img }];
 	localStorage.setItem('favorites', JSON.stringify(favorites));
 };
+
+export const deleteFavorite = (id) => {
+	let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+	let newFavorites = favorites.filter((value) => value.id !== id);
+	localStorage.setItem('favorites', JSON.stringify(newFavorites));
+};

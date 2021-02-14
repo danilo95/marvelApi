@@ -131,8 +131,8 @@ const SelectedCharacter = () => {
 						</Content>
 						<FavoriteItem
 							id={results[0]?.id}
-							title={results[0]?.title}
-							type={'comic'}
+							title={results[0]?.name}
+							type={'character'}
 							img={`${results[0]?.thumbnail.path}.${results[0]?.thumbnail.extension}`}
 							text={true}
 						/>
