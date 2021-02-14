@@ -13,6 +13,7 @@ import LoadingView from '../loadingView/LoadingView';
 import Gallery from '../Gallery/Gallery';
 import InformationTab from '../informationTab/InformationTab';
 import CharactersGallery from '../charactersGallery/CharactersGallery';
+import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { PageHeader, Tag, Row, Button } from 'antd';
 
 import { Title } from '../globalStyles/Index';
@@ -77,6 +78,14 @@ const SelectedComic = () => {
 						title={results[0]?.title}
 						tags={<Tag color="blue">{results[0]?.format}</Tag>}
 					>
+						<FavoriteItem
+							id={results[0]?.id}
+							title={results[0]?.title}
+							type={'comic'}
+							img={`${results[0]?.thumbnail.path}.${results[0]?.thumbnail.extension}`}
+							text={true}
+						/>
+
 						<Content>{results[0]?.description}</Content>
 					</PageHeader>
 					<Title>Gallery</Title>

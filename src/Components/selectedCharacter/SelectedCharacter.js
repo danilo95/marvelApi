@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
 import InformationTab from '../informationTab/InformationTab';
+import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { PageHeader, Image, Row, Button } from 'antd';
 import History from '../history/History';
 import { Title } from '../globalStyles/Index';
@@ -128,6 +129,13 @@ const SelectedCharacter = () => {
 						>
 							{results[0]?.description}
 						</Content>
+						<FavoriteItem
+							id={results[0]?.id}
+							title={results[0]?.title}
+							type={'comic'}
+							img={`${results[0]?.thumbnail.path}.${results[0]?.thumbnail.extension}`}
+							text={true}
+						/>
 					</PageHeader>
 					<Title>Information</Title>
 					<InformationTab

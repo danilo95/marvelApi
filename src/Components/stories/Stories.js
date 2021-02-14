@@ -3,7 +3,7 @@ import { getAllStories, loadingCharacters } from '../../Actions/StoriesActions';
 import { useDispatch, useSelector } from 'react-redux';
 import History from '../history/History';
 import { List, Skeleton } from 'antd';
-
+import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { Title, ContentWrapper, Show } from '../globalStyles/Index';
 
 const handleDetails = (id) => {
@@ -33,7 +33,12 @@ const Stories = () => {
 							<Show onClick={() => handleDetails(item.id)}>
 								show
 							</Show>,
-							<Show>save</Show>,
+							<FavoriteItem
+								id={item.id}
+								title={item.title}
+								type={'storie'}
+								img={null}
+							/>,
 						]}
 					>
 						<Skeleton

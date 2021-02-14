@@ -10,3 +10,9 @@ export const generateQueryParams = (obj) => {
 		}
 	return str.join('&');
 };
+
+export const saveFavorite = (id, title, type, img) => {
+	let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+	favorites = [...favorites, { id, title, type, img }];
+	localStorage.setItem('favorites', JSON.stringify(favorites));
+};
