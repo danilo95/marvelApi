@@ -4,6 +4,7 @@ import Stories from './Components/stories/Stories';
 import SelectedComic from './Components/selectedComic/SelectedComic';
 import SelectedCharacter from './Components/selectedCharacter/SelectedCharacter';
 import SelectedStorie from './Components/selectedStorie/SelectedStorie';
+import FavoriteItems from './Components/favoriteItems/FavoriteItems';
 
 import PublicRoute from './Components/publicRoute/PublicRoute';
 
@@ -56,5 +57,12 @@ export default [
 		exact: true,
 		type: PublicRoute,
 		component: SelectedStorie,
+	},
+	{
+		key: 8,
+		path: '/favorites',
+		exact: true,
+		type: PublicRoute,
+		component: FavoriteItems,
 	},
 ];

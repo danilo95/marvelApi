@@ -6,7 +6,7 @@ import History from '../history/History';
 import { LayoutWrapper, Content } from '../globalStyles/Index';
 
 const PublicRoute = ({ component: Component, path }) => {
-	const topics = ['Comics', 'Characters', 'Stories'];
+	const topics = ['Comics', 'Characters', 'Stories', 'Favorites'];
 	const [contentIndex, setContentIndex] = useState(0);
 	const [selectedKey, setSelectedKey] = useState('0');
 

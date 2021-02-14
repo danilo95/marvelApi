@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
+import History from '../history/History';
 import logo from './../../logo.svg';
-import { Navbar, Logo } from './Style';
+import { Logo, logoContainer } from './Style';
 
 const Header = ({ menu }) => {
 	const [visible, setVisible] = useState(false);
 	return (
-		<nav className="navbar">
+		<nav>
 			<Button
 				className="menu"
 				type="primary"
@@ -23,9 +24,9 @@ const Header = ({ menu }) => {
 			>
 				{menu}
 			</Drawer>
-			<a href="/">
+			<span onClick={() => History.push('/')}>
 				<Logo src={logo} alt="logo" />
-			</a>
+			</span>
 		</nav>
 	);
 };
