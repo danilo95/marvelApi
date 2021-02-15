@@ -82,7 +82,7 @@ export const getStories = (offSet) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.log(error);
+			return hadleError(error.response);
 		});
 
 	return result;

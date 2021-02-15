@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { getAllStories, loadingCharacters } from '../../Actions/StoriesActions';
 import { useDispatch, useSelector } from 'react-redux';
+import ErrorPage from '../errorPage/ErrorPage';
 import History from '../history/History';
 import { List, Skeleton, Pagination } from 'antd';
 import { Title, ContentWrapper, Show, Footer } from '../globalStyles/Index';
@@ -11,7 +12,9 @@ const handleDetails = (id) => {
 
 const Stories = () => {
 	const dispatch = useDispatch();
-	const { listOfStories, loading } = useSelector((state) => state.stories);
+	const { listOfStories, loading, error } = useSelector(
+		(state) => state.stories
+	);
 	const { total, count } = listOfStories;
 
 	useEffect(() => {
@@ -28,6 +31,9 @@ const Stories = () => {
 	return (
 		<ContentWrapper>
 			<Title>Stories</Title>
+			{error.code && (
+				<ErrorPage code={error.code} message={error.message} />
+			)}
 			<List
 				loading={loading}
 				itemLayout="horizontal"

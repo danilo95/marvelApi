@@ -19,8 +19,15 @@ export const types = {
 
 export const getAllStories = (offSet) => async (dispatch) => {
 	const response = await getStories(offSet);
-	dispatch({ type: types.GET_ALL_STORIES, payload: response.data });
-	dispatch({ type: types.LOADING_STORIES, payload: false });
+	if (response.error) {
+		dispatch({
+			type: types.GET_SINGLE_STORIE_ERROR,
+			payload: response.error,
+		});
+	} else {
+		dispatch({ type: types.GET_ALL_STORIES, payload: response.data });
+		dispatch({ type: types.LOADING_STORIES, payload: false });
+	}
 };
 
 export const loadingCharacters = () => (dispatch) => {
