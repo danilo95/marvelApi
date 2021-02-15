@@ -16,8 +16,8 @@ export const types = {
 	GET_SINGLE_STORIE_ERROR: 'GET_SINGLE_STORIE_ERROR',
 };
 
-export const getAllStories = () => async (dispatch) => {
-	const response = await getStories();
+export const getAllStories = (offSet) => async (dispatch) => {
+	const response = await getStories(offSet);
 	dispatch({ type: types.GET_ALL_STORIES, payload: response.data });
 	dispatch({ type: types.LOADING_STORIES, payload: false });
 };

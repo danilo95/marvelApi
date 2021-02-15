@@ -166,9 +166,9 @@ export const getSingleCharacter = (id) => {
 	return result;
 };
 
-export const getStories = () => {
+export const getStories = (offSet) => {
 	let result = url
-		.get(`/stories?${options}`)
+		.get(`/stories?offset=${offSet}&${options}`)
 		.then((response) => {
 			return response.data;
 		})
