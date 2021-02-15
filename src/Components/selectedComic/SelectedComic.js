@@ -12,6 +12,7 @@ import History from '../history/History';
 import LoadingView from '../loadingView/LoadingView';
 import Gallery from '../Gallery/Gallery';
 import InformationTab from '../informationTab/InformationTab';
+import ErrorPage from '../errorPage/ErrorPage';
 import CharactersGallery from '../charactersGallery/CharactersGallery';
 import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { PageHeader, Tag, Row, Button } from 'antd';
@@ -27,6 +28,7 @@ const SelectedComic = () => {
 		comicStories,
 		comicCharacters,
 		loadingCharacter,
+		error,
 	} = useSelector((state) => state.comics);
 	let { results } = comic;
 	let { total: totalStories, offset: offSetStories } = comicStories;
@@ -72,6 +74,9 @@ const SelectedComic = () => {
 	return (
 		<div>
 			{loading && <LoadingView />}
+			{error.code && (
+				<ErrorPage code={error.code} message={error.message} />
+			)}
 			{!loading && results && (
 				<div>
 					<PageHeader
