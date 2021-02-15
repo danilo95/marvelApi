@@ -5,7 +5,7 @@ import SelectedComic from './Components/selectedComic/SelectedComic';
 import SelectedCharacter from './Components/selectedCharacter/SelectedCharacter';
 import SelectedStorie from './Components/selectedStorie/SelectedStorie';
 import FavoriteItems from './Components/favoriteItems/FavoriteItems';
-
+import NotFound from './Components/notFound/NotFound';
 import PublicRoute from './Components/publicRoute/PublicRoute';
 
 export default [
@@ -64,5 +64,10 @@ export default [
 		exact: true,
 		type: PublicRoute,
 		component: FavoriteItems,
+	},
+	{
+		key: 9,
+		type: PublicRoute,
+		component: NotFound,
 	},
 ];
