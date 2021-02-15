@@ -10,6 +10,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
+import FavoriteItem from '../favoriteItem/FavoriteItem';
 import ErrorPage from '../errorPage/ErrorPage';
 import InformationTab from '../informationTab/InformationTab';
 import History from '../history/History';
@@ -96,6 +97,13 @@ const SelectedStorie = () => {
 			{!loading && results && (
 				<div>
 					<PageHeader title={results[0]?.title}>
+						<FavoriteItem
+							id={results[0]?.id}
+							title={results[0]?.title}
+							type={'storie'}
+							img={null}
+							text={true}
+						/>
 						<Content>{results[0]?.description}</Content>
 					</PageHeader>
 					<Title>Information</Title>

@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { getAllStories, loadingCharacters } from '../../Actions/StoriesActions';
 import { useDispatch, useSelector } from 'react-redux';
 import History from '../history/History';
-
-import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { List, Skeleton, Pagination } from 'antd';
 import { Title, ContentWrapper, Show, Footer } from '../globalStyles/Index';
 
@@ -34,7 +32,6 @@ const Stories = () => {
 				loading={loading}
 				style={{ width: '1000%' }}
 				itemLayout="horizontal"
-				//loadMore={loadMore}
 				dataSource={listOfStories?.results}
 				renderItem={(item) => (
 					<List.Item
@@ -42,12 +39,6 @@ const Stories = () => {
 							<Show onClick={() => handleDetails(item.id)}>
 								show
 							</Show>,
-							<FavoriteItem
-								id={item.id}
-								title={item.title}
-								type={'storie'}
-								img={null}
-							/>,
 						]}
 					>
 						<Skeleton

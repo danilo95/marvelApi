@@ -1,7 +1,6 @@
 import React from 'react';
 import { Tabs, List } from 'antd';
 import { Show } from '../globalStyles/Index';
-import FavoriteItem from '../favoriteItem/FavoriteItem';
 
 const { TabPane } = Tabs;
 
@@ -35,12 +34,6 @@ const InformationTab = ({
 								>
 									Show
 								</Show>,
-								<FavoriteItem
-									id={item.id}
-									title={item.title}
-									type={'serie'}
-									img={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-								/>,
 							]}
 						>
 							<List.Item.Meta
@@ -74,12 +67,6 @@ const InformationTab = ({
 								>
 									Show
 								</Show>,
-								<FavoriteItem
-									id={item.id}
-									title={item.title}
-									type={'storie'}
-									img={null}
-								/>,
 							]}
 						>
 							<List.Item.Meta
@@ -113,12 +100,6 @@ const InformationTab = ({
 								>
 									Show
 								</Show>,
-								<FavoriteItem
-									id={item.id}
-									title={item.title}
-									type={'comic'}
-									img={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-								/>,
 							]}
 						>
 							<List.Item.Meta
