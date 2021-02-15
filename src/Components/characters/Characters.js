@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from '../card/Card';
 import { Empty, Pagination } from 'antd';
 import LoadingView from '../loadingView/LoadingView';
+import ErrorPage from '../errorPage/ErrorPage';
 import History from '../history/History';
 import CharactersFilters from '../charactersFilters/CharactersFilters';
 import { generateQueryParams } from '../utils/Utils';
@@ -19,7 +20,7 @@ const Characters = () => {
 		orderBy: '',
 	});
 	const dispatch = useDispatch();
-	const { listOfCharacters, loading } = useSelector(
+	const { listOfCharacters, loading, error } = useSelector(
 		(state) => state.characters
 	);
 	const { total, count } = listOfCharacters;
@@ -44,6 +45,9 @@ const Characters = () => {
 		<ContentWrapper>
 			<CharactersFilters filters={filters} setFilters={setFilters} />
 			{loading && <LoadingView />}
+			{error.code && (
+				<ErrorPage code={error.code} message={error.message} />
+			)}
 			{listOfCharacters?.results?.length === 0 && <Empty />}
 			{!loading &&
 				listOfCharacters?.results?.map((value) => (

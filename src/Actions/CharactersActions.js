@@ -25,8 +25,15 @@ export const getAllCharacters = (params, offSet) => async (dispatch) => {
 		offSet = 0;
 	}
 	const response = await getCharacters(params, offSet);
-	dispatch({ type: types.GET_ALL_CHARACTERS, payload: response.data });
-	dispatch({ type: types.LOADING_CHARACTERS, payload: false });
+	if (response.error) {
+		dispatch({
+			type: types.GET_SINGLE_CHARACTER_ERROR,
+			payload: response.error,
+		});
+	} else {
+		dispatch({ type: types.GET_ALL_CHARACTERS, payload: response.data });
+		dispatch({ type: types.LOADING_CHARACTERS, payload: false });
+	}
 };
 
 export const loadingCharacters = () => (dispatch) => {
