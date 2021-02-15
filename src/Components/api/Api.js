@@ -70,32 +70,6 @@ export const getSeriesPerChracter = (id, offSet) => {
 	return result;
 };
 
-export const getStoriesPerComic = (id, offSet) => {
-	let result = url
-		.get(`/comics/${id}/stories?offset=${offSet}&${options}`)
-		.then((response) => {
-			return response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-
-	return result;
-};
-
-export const getCharactersPerComic = (id) => {
-	let result = url
-		.get(`/comics/${id}/characters?${options}`)
-		.then((response) => {
-			return response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-
-	return result;
-};
-
 export const getStoriesPerChracter = (id, offSet) => {
 	let result = url
 		.get(`/characters/${id}/stories?offset=${offSet}&${options}`)
@@ -222,4 +196,17 @@ const hadleError = (httpRequest) => {
 		},
 	};
 	return error;
+};
+
+export const getDetailsFromId = (id, offSet, path, filter) => {
+	let result = url
+		.get(`/${path}/${id}/${filter}?offset=${offSet}&${options}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
 };
