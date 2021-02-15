@@ -17,7 +17,7 @@ import CharactersGallery from '../charactersGallery/CharactersGallery';
 import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { PageHeader, Tag, Row, Button } from 'antd';
 
-import { Title } from '../globalStyles/Index';
+import { Title, LoadMoreBtn } from '../globalStyles/Index';
 
 const SelectedComic = () => {
 	let { id } = useParams();
@@ -59,16 +59,9 @@ const SelectedComic = () => {
 
 	const loadMoreStories =
 		!loadingStories && totalStories > offSetStories + 20 ? (
-			<div
-				style={{
-					textAlign: 'center',
-					marginTop: 12,
-					height: 32,
-					lineHeight: '32px',
-				}}
-			>
+			<LoadMoreBtn>
 				<Button onClick={onLoadMoreStories}>More Series</Button>
-			</div>
+			</LoadMoreBtn>
 		) : null;
 
 	return (

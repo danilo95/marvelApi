@@ -15,7 +15,7 @@ import ErrorPage from '../errorPage/ErrorPage';
 import InformationTab from '../informationTab/InformationTab';
 import History from '../history/History';
 import { PageHeader, Tag, Row, Button } from 'antd';
-import { Title } from '../globalStyles/Index';
+import { Title, LoadMoreBtn, RowContent } from '../globalStyles/Index';
 
 const SelectedStorie = () => {
 	let { id } = useParams();
@@ -44,7 +44,7 @@ const SelectedStorie = () => {
 
 	const Content = ({ children }) => (
 		<Row>
-			<div style={{ flex: 1, padding: 10 }}>{children}</div>
+			<RowContent>{children}</RowContent>
 		</Row>
 	);
 
@@ -63,30 +63,16 @@ const SelectedStorie = () => {
 
 	const loadMoreComics =
 		!loadingComics && total > offset + 20 ? (
-			<div
-				style={{
-					textAlign: 'center',
-					marginTop: 12,
-					height: 32,
-					lineHeight: '32px',
-				}}
-			>
+			<LoadMoreBtn>
 				<Button onClick={onLoadMoreComics}>More Comics</Button>
-			</div>
+			</LoadMoreBtn>
 		) : null;
 
 	const loadMoreSeries =
 		!loadingSeries && totalSeries > offSetSeries + 20 ? (
-			<div
-				style={{
-					textAlign: 'center',
-					marginTop: 12,
-					height: 32,
-					lineHeight: '32px',
-				}}
-			>
+			<LoadMoreBtn>
 				<Button onClick={onLoadMoreSeries}>More Series</Button>
-			</div>
+			</LoadMoreBtn>
 		) : null;
 	return (
 		<div>

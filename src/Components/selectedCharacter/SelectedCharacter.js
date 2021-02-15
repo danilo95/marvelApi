@@ -17,7 +17,7 @@ import ErrorPage from '../errorPage/ErrorPage';
 import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { PageHeader, Image, Row, Button } from 'antd';
 import History from '../history/History';
-import { Title } from '../globalStyles/Index';
+import { Title, LoadMoreBtn, RowContent } from '../globalStyles/Index';
 
 const SelectedCharacter = () => {
 	let { id } = useParams();
@@ -56,7 +56,7 @@ const SelectedCharacter = () => {
 	const Content = ({ children, extraContent }) => (
 		<Row>
 			<div>{extraContent}</div>
-			<div style={{ flex: 1, padding: 10 }}>{children}</div>
+			<RowContent>{children}</RowContent>
 		</Row>
 	);
 
@@ -75,44 +75,23 @@ const SelectedCharacter = () => {
 
 	const loadMoreComics =
 		!loadingComics && total > offset + 20 ? (
-			<div
-				style={{
-					textAlign: 'center',
-					marginTop: 12,
-					height: 32,
-					lineHeight: '32px',
-				}}
-			>
+			<LoadMoreBtn>
 				<Button onClick={onLoadMoreComics}>More Comics</Button>
-			</div>
+			</LoadMoreBtn>
 		) : null;
 
 	const loadMoreSeries =
 		!loadingSeries && totalSeries > offSetSeries + 20 ? (
-			<div
-				style={{
-					textAlign: 'center',
-					marginTop: 12,
-					height: 32,
-					lineHeight: '32px',
-				}}
-			>
+			<LoadMoreBtn>
 				<Button onClick={onLoadMoreSeries}>More Series</Button>
-			</div>
+			</LoadMoreBtn>
 		) : null;
 
 	const loadMoreStories =
 		!loadingStories && totalStories > offSetStories + 20 ? (
-			<div
-				style={{
-					textAlign: 'center',
-					marginTop: 12,
-					height: 32,
-					lineHeight: '32px',
-				}}
-			>
+			<LoadMoreBtn>
 				<Button onClick={onLoadMoreStories}>More Stories</Button>
-			</div>
+			</LoadMoreBtn>
 		) : null;
 
 	return (

@@ -35,6 +35,17 @@ export const Footer = styled.div`
 	padding: 30px;
 `;
 
+export const LoadMoreBtn = styled.div`
+	height: 32px;
+	margin: 20px 0px;
+	text-align: center;
+`;
+
+export const RowContent = styled.div`
+	flex: 1;
+	padding: 10px;
+`;
+
 //here start global styles
 export const GlobalStyle = createGlobalStyle`
  
