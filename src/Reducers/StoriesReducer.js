@@ -8,6 +8,8 @@ const initialState = {
 	loadingComics: false,
 	series: [],
 	loadingSeries: false,
+	characters: [],
+	loadingCharactersList: [],
 	error: {},
 };
 
@@ -42,6 +44,17 @@ export default (state = initialState, action) => {
 				...state,
 				error: action.payload,
 				loading: false,
+			};
+		case types.GET_STORIE_CHARACTERS:
+			return {
+				...state,
+				characters: action.payload,
+				loadingCharactersList: false,
+			};
+		case types.LOADING_CHARACTERS:
+			return {
+				...state,
+				loadingCharactersList: action.payload,
 			};
 		case types.LOADING_SERIES:
 			return {

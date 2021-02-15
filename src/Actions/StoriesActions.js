@@ -13,6 +13,8 @@ export const types = {
 	LOADING_SERIES: 'LOADING_SERIES',
 	GET_SERIES_PER_STORIE: 'GET_SERIES_PER_STORIE',
 	GET_SINGLE_STORIE_ERROR: 'GET_SINGLE_STORIE_ERROR',
+	GET_STORIE_CHARACTERS: 'GET_STORIE_CHARACTERS',
+	LOADING_CHARACTERS: 'LOADING_CHARACTERS',
 };
 
 export const getAllStories = (offSet) => async (dispatch) => {
@@ -56,4 +58,22 @@ export const getSeriesFromStorie = (id, offset) => async (dispatch) => {
 	const response = await getDetailsFromId(id, offset, 'stories', 'series');
 	dispatch({ type: types.GET_SERIES_PER_STORIE, payload: response.data });
 	dispatch({ type: types.LOADING_SERIES, payload: false });
+};
+
+export const getStorieCharacters = (id, offset) => async (dispatch) => {
+	const response = await getDetailsFromId(
+		id,
+		offset,
+		'stories',
+		'characters'
+	);
+	dispatch({
+		type: types.GET_STORIE_CHARACTERS,
+		payload: response.data.results,
+	});
+	dispatch({ type: types.LOADING_CHARACTERS, payload: false });
+};
+
+export const loadingStorieCharacters = () => (dispatch) => {
+	dispatch({ type: types.LOADING_CHARACTERS, payload: true });
 };

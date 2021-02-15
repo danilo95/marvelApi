@@ -6,6 +6,8 @@ import {
 	getComicsFromStorie,
 	loadingSeriesFromStorie,
 	getSeriesFromStorie,
+	loadingStorieCharacters,
+	getStorieCharacters,
 } from '../../Actions/StoriesActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,9 +15,10 @@ import LoadingView from '../loadingView/LoadingView';
 import FavoriteItem from '../favoriteItem/FavoriteItem';
 import ErrorPage from '../errorPage/ErrorPage';
 import InformationTab from '../informationTab/InformationTab';
+import CharactersGallery from '../charactersGallery/CharactersGallery';
 import Writers from '../writers/Writers';
 import History from '../history/History';
-import { PageHeader, Tag, Row, Button } from 'antd';
+import { PageHeader, Row, Button } from 'antd';
 import { Title, LoadMoreBtn, RowContent } from '../globalStyles/Index';
 
 const SelectedStorie = () => {
@@ -28,6 +31,8 @@ const SelectedStorie = () => {
 		series,
 		loadingSeries,
 		error,
+		characters,
+		loadingCharactersList,
 	} = useSelector((state) => state.stories);
 	let { results } = storie;
 	let { total, offset } = comics;
@@ -41,6 +46,8 @@ const SelectedStorie = () => {
 		dispatch(getComicsFromStorie(id, 0));
 		dispatch(loadingSeriesFromStorie());
 		dispatch(getSeriesFromStorie(id, 0));
+		dispatch(loadingStorieCharacters());
+		dispatch(getStorieCharacters(id, 0));
 	}, []);
 
 	const Content = ({ children }) => (
@@ -93,6 +100,12 @@ const SelectedStorie = () => {
 						/>
 						<Content>{results[0]?.description}</Content>
 						<Writers writers={results[0]?.creators?.items} />
+						<Title>Characters</Title>
+						<CharactersGallery
+							loading={loadingCharactersList}
+							gallery={characters}
+							handleRedirect={handleRedirect}
+						/>
 					</PageHeader>
 					<Title>Information</Title>
 					<InformationTab
