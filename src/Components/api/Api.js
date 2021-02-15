@@ -193,11 +193,10 @@ export const getSingleStorie = (id) => {
 };
 
 const hadleError = (httpRequest) => {
-	console.log(httpRequest);
-	let { code } = httpRequest.status;
+	let { status } = httpRequest;
 	let error = {};
 	let message = '';
-	switch (code) {
+	switch (status) {
 		case 404:
 			message =
 				'Oops, the resource you were looking for was not finding.';
@@ -214,7 +213,7 @@ const hadleError = (httpRequest) => {
 	error = {
 		error: {
 			message,
-			code,
+			code: status,
 		},
 	};
 	return error;

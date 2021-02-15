@@ -118,7 +118,9 @@ const SelectedCharacter = () => {
 	return (
 		<div>
 			{loading && <LoadingView />}
-			{error && <ErrorPage code={error.code} message={error.message} />}
+			{error.code && (
+				<ErrorPage code={error.code} message={error.message} />
+			)}
 			{!loading && results && (
 				<div>
 					<PageHeader title={results[0]?.name}>
