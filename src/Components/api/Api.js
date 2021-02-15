@@ -25,7 +25,7 @@ export const getComics = (params, offSet) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.log(error);
+			console.log(error.response);
 		});
 
 	return result;
@@ -160,7 +160,7 @@ export const getSingleCharacter = (id) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.log(error);
+			return hadleError(error.response);
 		});
 
 	return result;
@@ -190,4 +190,32 @@ export const getSingleStorie = (id) => {
 		});
 
 	return result;
+};
+
+const hadleError = (httpRequest) => {
+	console.log(httpRequest);
+	let { code } = httpRequest.status;
+	let error = {};
+	let message = '';
+	switch (code) {
+		case 404:
+			message =
+				'Oops, the resource you were looking for was not finding.';
+		case 401:
+			message =
+				'You do not have the proper permissions to make this request';
+		case 500:
+			message =
+				'something happened unexpectedly, this is not your fault.please reload the page';
+		default:
+			message =
+				'something goes wrong, please reload the page and try again';
+	}
+	error = {
+		error: {
+			message,
+			code,
+		},
+	};
+	return error;
 };

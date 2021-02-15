@@ -9,6 +9,7 @@ const initialState = {
 	loadingSeries: false,
 	characterStories: [],
 	loadingStories: false,
+	error: {},
 };
 
 export default (state = initialState, action) => {
@@ -42,6 +43,12 @@ export default (state = initialState, action) => {
 				...state,
 				characterStories: action.payload,
 				loadingStories: false,
+			};
+		case types.GET_SINGLE_CHARACTER_ERROR:
+			return {
+				...state,
+				error: action.payload,
+				loading: false,
 			};
 		case types.LOADING_CHARACTER_STORIES:
 			return {

@@ -17,6 +17,7 @@ export const types = {
 	GET_SERIES_PER_CHARACTER: 'GET_SERIES_PER_CHARACTER',
 	LOADING_CHARACTER_STORIES: 'LOADING_CHARACTER_STORIES',
 	GET_STORIES_PER_CHARACTER: 'GET_STORIES_PER_CHARACTER',
+	GET_SINGLE_CHARACTER_ERROR: 'GET_SINGLE_CHARACTER_ERROR',
 };
 
 export const getAllCharacters = (params, offSet) => async (dispatch) => {
@@ -34,8 +35,15 @@ export const loadingCharacters = () => (dispatch) => {
 
 export const getCharacterById = (id) => async (dispatch) => {
 	const response = await getSingleCharacter(id);
-	dispatch({ type: types.GET_SINGLE_CHARACTER, payload: response.data });
-	dispatch({ type: types.LOADING_CHARACTERS, payload: false });
+	if (response.error) {
+		dispatch({
+			type: types.GET_SINGLE_CHARACTER_ERROR,
+			payload: response.error,
+		});
+	} else {
+		dispatch({ type: types.GET_SINGLE_CHARACTER, payload: response.data });
+		dispatch({ type: types.LOADING_CHARACTERS, payload: false });
+	}
 };
 
 export const loadingCharactersComics = () => (dispatch) => {

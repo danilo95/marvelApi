@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
 import InformationTab from '../informationTab/InformationTab';
+import ErrorPage from '../errorPage/ErrorPage';
 import FavoriteItem from '../favoriteItem/FavoriteItem';
 import { PageHeader, Image, Row, Button } from 'antd';
 import History from '../history/History';
@@ -29,6 +30,7 @@ const SelectedCharacter = () => {
 		loadingSeries,
 		characterStories,
 		loadingStories,
+		error,
 	} = useSelector((state) => state.characters);
 	let { total, offset } = characterComics;
 	let { total: totalSeries, offset: offSetSeries } = characterSeries;
@@ -116,6 +118,7 @@ const SelectedCharacter = () => {
 	return (
 		<div>
 			{loading && <LoadingView />}
+			{error && <ErrorPage code={error.code} message={error.message} />}
 			{!loading && results && (
 				<div>
 					<PageHeader title={results[0]?.name}>
