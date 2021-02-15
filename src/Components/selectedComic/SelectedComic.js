@@ -5,6 +5,7 @@ import {
 	getComicStories,
 	loadingComicCharacters,
 	getComicCharacters,
+	loadingComics,
 } from '../../Actions/ComicsActions';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,7 +35,9 @@ const SelectedComic = () => {
 	let { total: totalStories, offset: offSetStories } = comicStories;
 
 	const dispatch = useDispatch();
+
 	useEffect(() => {
+		dispatch(loadingComics());
 		dispatch(getComicById(id));
 		dispatch(loadingComicStories());
 		dispatch(getComicStories(id, 0));
