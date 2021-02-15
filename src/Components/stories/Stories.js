@@ -31,6 +31,7 @@ const Stories = () => {
 			<List
 				loading={loading}
 				itemLayout="horizontal"
+				style={{ width: '100%' }}
 				dataSource={listOfStories?.results}
 				renderItem={(item) => (
 					<List.Item

@@ -13,6 +13,7 @@ import LoadingView from '../loadingView/LoadingView';
 import FavoriteItem from '../favoriteItem/FavoriteItem';
 import ErrorPage from '../errorPage/ErrorPage';
 import InformationTab from '../informationTab/InformationTab';
+import Writers from '../writers/Writers';
 import History from '../history/History';
 import { PageHeader, Tag, Row, Button } from 'antd';
 import { Title, LoadMoreBtn, RowContent } from '../globalStyles/Index';
@@ -91,6 +92,7 @@ const SelectedStorie = () => {
 							text={true}
 						/>
 						<Content>{results[0]?.description}</Content>
+						<Writers writers={results[0]?.creators?.items} />
 					</PageHeader>
 					<Title>Information</Title>
 					<InformationTab
