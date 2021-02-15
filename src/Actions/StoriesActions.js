@@ -13,6 +13,7 @@ export const types = {
 	GET_COMICS_PER_STORIE: 'GET_COMICS_PER_STORIE',
 	LOADING_SERIES: 'LOADING_SERIES',
 	GET_SERIES_PER_STORIE: 'GET_SERIES_PER_STORIE',
+	GET_SINGLE_STORIE_ERROR: 'GET_SINGLE_STORIE_ERROR',
 };
 
 export const getAllStories = () => async (dispatch) => {
@@ -27,8 +28,15 @@ export const loadingCharacters = () => (dispatch) => {
 
 export const getStorie = (id) => async (dispatch) => {
 	const response = await getSingleStorie(id);
-	dispatch({ type: types.GET_SINGLE_STORIE, payload: response.data });
-	dispatch({ type: types.LOADING_STORIES, payload: false });
+	if (response.error) {
+		dispatch({
+			type: types.GET_SINGLE_STORIE_ERROR,
+			payload: response.error,
+		});
+	} else {
+		dispatch({ type: types.GET_SINGLE_STORIE, payload: response.data });
+		dispatch({ type: types.LOADING_STORIES, payload: false });
+	}
 };
 
 export const loadingComicsFromStorie = () => (dispatch) => {

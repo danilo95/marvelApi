@@ -10,6 +10,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingView from '../loadingView/LoadingView';
+import ErrorPage from '../errorPage/ErrorPage';
 import InformationTab from '../informationTab/InformationTab';
 import History from '../history/History';
 import { PageHeader, Tag, Row, Button } from 'antd';
@@ -24,6 +25,7 @@ const SelectedStorie = () => {
 		loadingComics,
 		series,
 		loadingSeries,
+		error,
 	} = useSelector((state) => state.stories);
 	let { results } = storie;
 	let { total, offset } = comics;
@@ -88,6 +90,9 @@ const SelectedStorie = () => {
 	return (
 		<div>
 			{loading && <LoadingView />}
+			{error.code && (
+				<ErrorPage code={error.code} message={error.message} />
+			)}
 			{!loading && results && (
 				<div>
 					<PageHeader title={results[0]?.title}>

@@ -8,6 +8,7 @@ const initialState = {
 	loadingComics: false,
 	series: [],
 	loadingSeries: false,
+	error: {},
 };
 
 export default (state = initialState, action) => {
@@ -35,6 +36,12 @@ export default (state = initialState, action) => {
 				...state,
 				series: action.payload,
 				loadingSeries: false,
+			};
+		case types.GET_SINGLE_STORIE_ERROR:
+			return {
+				...state,
+				error: action.payload,
+				loading: false,
 			};
 		case types.LOADING_SERIES:
 			return {
