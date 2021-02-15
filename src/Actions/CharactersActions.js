@@ -1,9 +1,7 @@
 import {
 	getCharacters,
 	getSingleCharacter,
-	getComicsPerChracter,
-	getSeriesPerChracter,
-	getStoriesPerChracter,
+	getDetailsFromId,
 } from '../Components/api/Api';
 
 export const types = {
@@ -58,7 +56,7 @@ export const loadingCharactersComics = () => (dispatch) => {
 };
 
 export const getCharacterComics = (id, offset) => async (dispatch) => {
-	const response = await getComicsPerChracter(id, offset);
+	const response = await getDetailsFromId(id, offset, 'characters', 'comics');
 	dispatch({ type: types.GET_COMICS_PER_CHARACTER, payload: response.data });
 	dispatch({ type: types.LOADING_CHARACTER_COMICS, payload: false });
 };
@@ -68,7 +66,7 @@ export const loadingCharactersSeries = () => (dispatch) => {
 };
 
 export const getCharacterSeries = (id, offset) => async (dispatch) => {
-	const response = await getSeriesPerChracter(id, offset);
+	const response = await getDetailsFromId(id, offset, 'characters', 'series');
 	dispatch({ type: types.GET_SERIES_PER_CHARACTER, payload: response.data });
 	dispatch({ type: types.LOADING_CHARACTER_SERIES, payload: false });
 };
@@ -78,7 +76,12 @@ export const loadingCharactersStories = () => (dispatch) => {
 };
 
 export const getCharacterStories = (id, offset) => async (dispatch) => {
-	const response = await getStoriesPerChracter(id, offset);
+	const response = await getDetailsFromId(
+		id,
+		offset,
+		'characters',
+		'stories'
+	);
 	dispatch({ type: types.GET_STORIES_PER_CHARACTER, payload: response.data });
 	dispatch({ type: types.LOADING_CHARACTER_STORIES, payload: false });
 };
