@@ -5,6 +5,7 @@ import { Empty, Pagination } from 'antd';
 import Card from '../card/Card';
 import History from '../history/History';
 import LoadingView from '../loadingView/LoadingView';
+import ErrorPage from '../errorPage/ErrorPage';
 import ComicsFilters from '../comicsFilters/ComicsFilters';
 import { generateQueryParams } from '../utils/Utils';
 
@@ -18,7 +19,9 @@ const Comics = () => {
 		issueNumber: '',
 	});
 	const dispatch = useDispatch();
-	const { listOfComics, loading } = useSelector((state) => state.comics);
+	const { listOfComics, loading, error } = useSelector(
+		(state) => state.comics
+	);
 	const { total, count } = listOfComics;
 
 	useEffect(() => {
@@ -41,6 +44,9 @@ const Comics = () => {
 			<ComicsFilters filters={filters} setFilters={setFilters} />
 			{loading && <LoadingView />}
 			{listOfComics?.results?.length === 0 && <Empty />}
+			{error.code && (
+				<ErrorPage code={error.code} message={error.message} />
+			)}
 			{!loading &&
 				listOfComics?.results?.length > 0 &&
 				listOfComics?.results?.map((value) => (

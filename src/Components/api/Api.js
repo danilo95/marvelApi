@@ -25,7 +25,7 @@ export const getComics = (params, offSet) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.log(error.response);
+			return hadleError(error.response);
 		});
 
 	return result;
@@ -212,6 +212,7 @@ const hadleError = (httpRequest) => {
 		default:
 			message =
 				'something goes wrong, please reload the page and try again';
+			status = 500;
 			break;
 	}
 	error = {

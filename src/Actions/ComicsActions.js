@@ -21,8 +21,15 @@ export const getAllComics = (params, offSet) => async (dispatch) => {
 		offSet = 0;
 	}
 	const response = await getComics(params, offSet);
-	dispatch({ type: types.GET_ALL_COMICS, payload: response.data });
-	dispatch({ type: types.LOADING_COMICS, payload: false });
+	if (response.error) {
+		dispatch({
+			type: types.GET_SINGLE_COMIC_ERROR,
+			payload: response.error,
+		});
+	} else {
+		dispatch({ type: types.GET_ALL_COMICS, payload: response.data });
+		dispatch({ type: types.LOADING_COMICS, payload: false });
+	}
 };
 
 export const loadingComics = () => (dispatch) => {
