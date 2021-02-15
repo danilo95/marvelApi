@@ -1,8 +1,7 @@
 import {
 	getStories,
 	getSingleStorie,
-	getComicsPerStory,
-	getSeriessPerStory,
+	getDetailsFromId,
 } from '../Components/api/Api';
 
 export const types = {
@@ -44,7 +43,7 @@ export const loadingComicsFromStorie = () => (dispatch) => {
 };
 
 export const getComicsFromStorie = (id, offset) => async (dispatch) => {
-	const response = await getComicsPerStory(id, offset);
+	const response = await getDetailsFromId(id, offset, 'stories', 'comics');
 	dispatch({ type: types.GET_COMICS_PER_STORIE, payload: response.data });
 	dispatch({ type: types.LOADING_COMICS, payload: false });
 };
@@ -54,7 +53,7 @@ export const loadingSeriesFromStorie = () => (dispatch) => {
 };
 
 export const getSeriesFromStorie = (id, offset) => async (dispatch) => {
-	const response = await getSeriessPerStory(id, offset);
+	const response = await getDetailsFromId(id, offset, 'stories', 'series');
 	dispatch({ type: types.GET_SERIES_PER_STORIE, payload: response.data });
 	dispatch({ type: types.LOADING_SERIES, payload: false });
 };

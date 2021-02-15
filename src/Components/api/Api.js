@@ -44,32 +44,6 @@ export const getSingleComic = (id) => {
 	return result;
 };
 
-export const getComicsPerStory = (id, offSet) => {
-	let result = url
-		.get(`/stories/${id}/comics?offset=${offSet}&${options}`)
-		.then((response) => {
-			return response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-
-	return result;
-};
-
-export const getSeriessPerStory = (id, offSet) => {
-	let result = url
-		.get(`/stories/${id}/series?offset=${offSet}&${options}`)
-		.then((response) => {
-			return response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-
-	return result;
-};
-
 export const getCharacters = (params, offSet) => {
 	if (params) {
 		request = `?${params}&offset=${offSet}&${options}`;
@@ -127,6 +101,19 @@ export const getSingleStorie = (id) => {
 	return result;
 };
 
+export const getDetailsFromId = (id, offSet, path, filter) => {
+	let result = url
+		.get(`/${path}/${id}/${filter}?offset=${offSet}&${options}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	return result;
+};
+
 const hadleError = (httpRequest) => {
 	let { status } = httpRequest;
 	let error = {};
@@ -157,17 +144,4 @@ const hadleError = (httpRequest) => {
 		},
 	};
 	return error;
-};
-
-export const getDetailsFromId = (id, offSet, path, filter) => {
-	let result = url
-		.get(`/${path}/${id}/${filter}?offset=${offSet}&${options}`)
-		.then((response) => {
-			return response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-
-	return result;
 };
