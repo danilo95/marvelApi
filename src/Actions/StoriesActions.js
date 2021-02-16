@@ -24,6 +24,7 @@ export const getAllStories = (offSet) => async (dispatch) => {
 			type: types.GET_SINGLE_STORIE_ERROR,
 			payload: response.error,
 		});
+		dispatch({ type: types.LOADING_STORIES, payload: false });
 	} else {
 		dispatch({ type: types.GET_ALL_STORIES, payload: response.data });
 		dispatch({ type: types.LOADING_STORIES, payload: false });

@@ -25,6 +25,7 @@ export const getAllComics = (params, offSet) => async (dispatch) => {
 			type: types.GET_SINGLE_COMIC_ERROR,
 			payload: response.error,
 		});
+		dispatch({ type: types.LOADING_COMICS, payload: false });
 	} else {
 		dispatch({ type: types.GET_ALL_COMICS, payload: response.data });
 		dispatch({ type: types.LOADING_COMICS, payload: false });

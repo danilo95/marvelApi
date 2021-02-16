@@ -45,6 +45,7 @@ export const getCharacterById = (id) => async (dispatch) => {
 			type: types.GET_SINGLE_CHARACTER_ERROR,
 			payload: response.error,
 		});
+		dispatch({ type: types.LOADING_CHARACTERS, payload: false });
 	} else {
 		dispatch({ type: types.GET_SINGLE_CHARACTER, payload: response.data });
 		dispatch({ type: types.LOADING_CHARACTERS, payload: false });

@@ -17,6 +17,7 @@ export const getSerieById = (id) => async (dispatch) => {
 			type: types.GET_SERIE_ERROR,
 			payload: response.error,
 		});
+		dispatch({ type: types.LOADING_SERIE, payload: false });
 	} else {
 		dispatch({ type: types.GET_SINGLE_SERIE, payload: response.data });
 		dispatch({ type: types.LOADING_SERIE, payload: false });
