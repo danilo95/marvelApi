@@ -114,6 +114,19 @@ export const getDetailsFromId = (id, offSet, path, filter) => {
 	return result;
 };
 
+export const getSingleSerie = (id) => {
+	let result = url
+		.get(`/series/${id}?${options}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			return hadleError(error.response);
+		});
+
+	return result;
+};
+
 const hadleError = (httpRequest) => {
 	let { status } = httpRequest;
 	let error = {};

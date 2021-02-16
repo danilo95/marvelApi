@@ -6,6 +6,7 @@ import SelectedCharacter from './Components/selectedCharacter/SelectedCharacter'
 import SelectedStorie from './Components/selectedStorie/SelectedStorie';
 import FavoriteItems from './Components/favoriteItems/FavoriteItems';
 import NotFound from './Components/notFound/NotFound';
+import SelectedSerie from './Components/selectedSerie/SelectedSerie';
 import PublicRoute from './Components/publicRoute/PublicRoute';
 
 export default [
@@ -67,6 +68,13 @@ export default [
 	},
 	{
 		key: 9,
+		path: '/serie/:id',
+		exact: true,
+		type: PublicRoute,
+		component: SelectedSerie,
+	},
+	{
+		key: 10,
 		type: PublicRoute,
 		component: NotFound,
 	},
