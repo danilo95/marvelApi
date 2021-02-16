@@ -22,3 +22,7 @@ export const Logo = styled.img`
 	margin-left: 1rem;
 	cursor: pointer;
 `;
+
+export const Nav = styled.nav`
+	background: #1890ff;
+`;

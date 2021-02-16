@@ -3,12 +3,12 @@ import { Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import History from '../history/History';
 import logo from './../../logo.svg';
-import { Logo, logoContainer } from './Style';
+import { Logo, logoContainer, Nav } from './Style';
 
 const Header = ({ menu }) => {
 	const [visible, setVisible] = useState(false);
 	return (
-		<nav>
+		<Nav>
 			<Button
 				className="menu"
 				type="primary"
@@ -27,7 +27,7 @@ const Header = ({ menu }) => {
 			<span onClick={() => History.push('/')}>
 				<Logo src={logo} alt="logo" />
 			</span>
-		</nav>
+		</Nav>
 	);
 };
 export default Header;
