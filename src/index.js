@@ -14,7 +14,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 const renderLoader = () => (
-	<div class="full-page-loader">
+	<div className="full-page-loader">
 		<img width="200" src={applaudoLogo} alt="applaudo-logo" />
 	</div>
 );

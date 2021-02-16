@@ -19,7 +19,12 @@ import CharactersGallery from '../charactersGallery/CharactersGallery';
 import Writers from '../writers/Writers';
 import History from '../history/History';
 import { PageHeader, Row, Button } from 'antd';
-import { Title, LoadMoreBtn, RowContent } from '../globalStyles/Index';
+import {
+	Title,
+	LoadMoreBtn,
+	RowContent,
+	StorieContainer,
+} from '../globalStyles/Index';
 
 const SelectedStorie = () => {
 	let { id } = useParams();
@@ -89,7 +94,7 @@ const SelectedStorie = () => {
 				<ErrorPage code={error.code} message={error.message} />
 			)}
 			{!loading && results && (
-				<div>
+				<StorieContainer>
 					<PageHeader title={results[0]?.title}>
 						<FavoriteItem
 							id={results[0]?.id}
@@ -117,7 +122,7 @@ const SelectedStorie = () => {
 						loadingSeries={loadingSeries}
 						loadMoreSeries={loadMoreSeries}
 					/>
-				</div>
+				</StorieContainer>
 			)}
 		</div>
 	);

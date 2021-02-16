@@ -13,6 +13,21 @@ export const ContentWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	@media (max-width: 700px) {
+		justify-content: center;
+	}
+`;
+
+export const StorieContainer = styled.div`
+	.ant-page-header {
+		.ant-page-header-heading {
+			.ant-page-header-heading-left {
+				span {
+					white-space: break-spaces;
+				}
+			}
+		}
+	}
 `;
 
 export const Title = styled.h2`

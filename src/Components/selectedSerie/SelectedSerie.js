@@ -36,7 +36,6 @@ const SelectedSerie = () => {
 					/>
 					<Title>Writers</Title>
 					<Writers writers={serie?.results[0]?.creators?.items} />
-					<Content>{serie?.results[0]?.description}</Content>
 				</PageHeader>
 			)}
 		</div>
