@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 import { marvelApi } from '../config/Config';
 
 const url = axios.create({
-	baseURL: 'http://gateway.marvel.com/v1/public/',
+	baseURL: marvelApi.baseUrl || 'http://gateway.marvel.com/v1/public/',
 });
 let ts = 1;
 let hash = CryptoJS.MD5(
