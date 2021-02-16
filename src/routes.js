@@ -1,13 +1,24 @@
-import Comics from './Components/comics/Comics';
-import Characters from './Components/characters/Characters';
-import Stories from './Components/stories/Stories';
-import SelectedComic from './Components/selectedComic/SelectedComic';
-import SelectedCharacter from './Components/selectedCharacter/SelectedCharacter';
-import SelectedStorie from './Components/selectedStorie/SelectedStorie';
-import FavoriteItems from './Components/favoriteItems/FavoriteItems';
-import NotFound from './Components/notFound/NotFound';
-import SelectedSerie from './Components/selectedSerie/SelectedSerie';
-import PublicRoute from './Components/publicRoute/PublicRoute';
+import { lazy } from 'react';
+const Comics = lazy(() => import('./Components/comics/Comics'));
+const Characters = lazy(() => import('./Components/characters/Characters'));
+const Stories = lazy(() => import('./Components/stories/Stories'));
+const SelectedComic = lazy(() =>
+	import('./Components/selectedComic/SelectedComic')
+);
+const SelectedCharacter = lazy(() =>
+	import('./Components/selectedCharacter/SelectedCharacter')
+);
+const SelectedStorie = lazy(() =>
+	import('./Components/selectedStorie/SelectedStorie')
+);
+const FavoriteItems = lazy(() =>
+	import('./Components/favoriteItems/FavoriteItems')
+);
+const NotFound = lazy(() => import('./Components/notFound/NotFound'));
+const SelectedSerie = lazy(() =>
+	import('./Components/selectedSerie/SelectedSerie')
+);
+const PublicRoute = lazy(() => import('./Components/publicRoute/PublicRoute'));
 
 export default [
 	{

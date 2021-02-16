@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
@@ -16,7 +16,9 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<Router history={History}>
-				<App />
+				<Suspense fallback={<span>Loading</span>}>
+					<App />
+				</Suspense>
 			</Router>
 		</Provider>
 	</React.StrictMode>,
