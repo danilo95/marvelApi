@@ -4,6 +4,8 @@ import TopicMenu from '../header/TopicMenu';
 import NavBar from '../header/Header';
 import History from '../history/History';
 import { LayoutWrapper, Content } from '../globalStyles/Index';
+import { Layout } from 'antd';
+const { Footer } = Layout;
 
 const PublicRoute = ({ component: Component, path }) => {
 	const topics = ['Comics', 'Characters', 'Stories', 'Favorites'];
@@ -36,6 +38,9 @@ const PublicRoute = ({ component: Component, path }) => {
 								<Component {...props} />
 							</Content>
 						</LayoutWrapper>
+						<Footer style={{ textAlign: 'center' }}>
+							©2021 Created by Danilo Rivera
+						</Footer>
 					</div>
 				);
 			}}
