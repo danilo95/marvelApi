@@ -18,6 +18,7 @@ export const Navbar = styled.nav`
 
 export const Logo = styled.img`
 	height: 32px;
+	width: 32px;
 	margin-left: 1rem;
 	cursor: pointer;
 `;
