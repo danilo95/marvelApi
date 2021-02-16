@@ -21,7 +21,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#1890ff",
-   "background_color": "#FFFFF",
+   "background_color": "#FFFFFF",
 "orientation": "natural",
 	
 	"categories": ["technology", "web"]
