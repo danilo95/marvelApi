@@ -5,15 +5,13 @@ import { Empty, Pagination } from 'antd';
 import History from '../history/History';
 import LoadingView from '../loadingView/LoadingView';
 import ErrorPage from '../errorPage/ErrorPage';
-
+import ComicsFilters from '../comicsFilters/ComicsFilters';
+import Card from '../card/Card';
 import { generateQueryParams } from '../utils/Utils';
 
 import { ContentWrapper, Footer } from '../globalStyles/Index';
 
 const Comics = () => {
-	const Card = lazy(() => import('../card/Card'));
-	const ComicsFilters = lazy(() => import('../comicsFilters/ComicsFilters'));
-
 	const [filters, setFilters] = useState({
 		format: '',
 		titleStartsWith: '',
